@@ -7,8 +7,8 @@ namespace Composer\Autoload;
 class ComposerStaticInit343657227fa23e91cf9a6ff41b118bab
 {
     public static $files = array (
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -52,8 +52,8 @@ class ComposerStaticInit343657227fa23e91cf9a6ff41b118bab
         'Ubiquity\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmv/ubiquity/src/Ubiquity',
-            1 => __DIR__ . '/..' . '/phpmv/ubiquity-mailer/src/Ubiquity',
-            2 => __DIR__ . '/..' . '/phpmv/ubiquity-dev/src/Ubiquity',
+            1 => __DIR__ . '/..' . '/phpmv/ubiquity-dev/src/Ubiquity',
+            2 => __DIR__ . '/..' . '/phpmv/ubiquity-mailer/src/Ubiquity',
             3 => __DIR__ . '/..' . '/phpmv/ubiquity-webtools/src/Ubiquity',
         ),
         'Twig\\' => 
