@@ -17,6 +17,10 @@ class QuestionController extends ControllerBase {
 		parent::initialize ();
 		$this->UIService = new UIService ( $this->jquery );
 	}
+	/**
+	 *
+	 * @route('_default')
+	 */
 	public function index() {
 		$frm = $this->UIService->questionForm ();
 		$frm->fieldAsSubmit ( 'Valider', 'green', 'QuestionController/submit', '', [ 
