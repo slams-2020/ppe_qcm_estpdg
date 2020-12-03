@@ -1,45 +1,47 @@
 <?php
+
 namespace controllers;
-use controllers\crud\datas\QuestionControllerDatas;
-use Ubiquity\controllers\crud\CRUDDatas;
-use controllers\crud\viewers\QuestionControllerViewer;
-use Ubiquity\controllers\crud\viewers\ModelViewer;
-use controllers\crud\events\QuestionControllerEvents;
-use Ubiquity\controllers\crud\CRUDEvents;
-use controllers\crud\files\QuestionControllerFiles;
-use Ubiquity\controllers\crud\CRUDFiles;
 
- /**
-  * CRUD Controller QuestionController
- * @route("/Questions","inherited"=>true,"automated"=>true)
-  */
-class QuestionController extends \Ubiquity\controllers\crud\CRUDController{
+use Ubiquity\orm\DAO;
+use Ubiquity\utils\http\URequest;
+use models\Question;
+use models\Typeq;
+use services\UIService;
 
-	public function __construct(){
-		parent::__construct();
-		\Ubiquity\orm\DAO::start();
-		$this->model="models\\Question";
+/**
+ * Controller Question
+ */
+class QuestionController extends ControllerBase {
+	private $UIService;
+	public function initialize() {
+		parent::initialize ();
+		$this->UIService = new UIService ( $this->jquery );
 	}
+	public function index() {
+		$frm = $this->UIService->questionForm ();
+		$frm->fieldAsSubmit ( 'Valider', 'green', 'QuestionController/submit', '', [ 
+				'ajax' => [ 
+						'hasLoader' => 'internal'
+				]
+		] );
 
-	public function _getBaseRoute() {
-		return '/Questions';
+		$this->jquery->renderView ( "QuestionController/index.html" );
 	}
-	
-	protected function getAdminData(): CRUDDatas{
-		return new QuestionControllerDatas($this);
+	public function submit() {
+		$question = new Question ();
+		URequest::setValuesToObject ( $question );
+		DAO::insert ( $question );
 	}
-
-	protected function getModelViewer(): ModelViewer{
-		return new QuestionControllerViewer($this);
+	public function question() {
+		$frm = $this->UIService->questionForm ();
+		$this->jquery->getOnClick ( '#dropdown-form-typeq-0 .item', 'QuestionController/detailsQ', '#response', [ 
+				'attr' => 'data-value',
+				'hasLoader' => false
+		] );
+		$this->jquery->renderView ( "QuestionController/question.html" );
 	}
-
-	protected function getEvents(): CRUDEvents{
-		return new QuestionControllerEvents($this);
+	public function detailsQ($id) {
+		$type = DAO::getById ( Typeq::class, 'id=' . $id );
+		echo $type->getCaption ();
 	}
-
-	protected function getFiles(): CRUDFiles{
-		return new QuestionControllerFiles();
-	}
-
-
 }
