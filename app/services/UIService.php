@@ -3,11 +3,18 @@
 namespace services;
 
 use Ajax\php\ubiquity\JsUtils;
+use Ubiquity\orm\DAO;
+use models\Question;
 use models\User;
+<<<<<<< HEAD
 use models\Qcm;
 use Ubiquity\orm\DAO;
 use models\Question;
 use Ajax\service\JArray;
+=======
+use Ajax\service\JArray;
+use models\Typeq;
+>>>>>>> c33041add9fab61c55420dd3de762502a4ef827c
 
 class UIService {
 	protected $jquery;
@@ -16,6 +23,7 @@ class UIService {
 		$this->jquery = $jq;
 		$this->semantic = $jq->semantic ();
 	}
+<<<<<<< HEAD
 	
 	public function qcmForm() {
 	    $q =  new Qcm();
@@ -61,6 +69,24 @@ class UIService {
 	    
 	}
 	
+=======
+	public function questionForm() {
+		$q = new Question ();
+		$frm = $this->jquery->semantic ()->dataForm ( 'form', $q );
+		$frm->setFields ( [ 
+				'caption',
+				'typeq'
+		] );
+		$types = DAO::getAll ( Typeq::class );
+		$q->setTypeq ( current ( $types ) );
+		$frm->fieldAsDropDown ( 'typeq', JArray::modelArray ( $types, 'getId' ) );
+		$frm->setValidationParams ( [ 
+				"on" => "blur",
+				"inline" => true
+		] );
+		return $frm;
+	}
+>>>>>>> c33041add9fab61c55420dd3de762502a4ef827c
 	public function userForm() {
 		$frm = $this->jquery->semantic ()->dataForm ( 'form', new User () );
 		$frm->setFields ( [ 

@@ -1,5 +1,7 @@
 <?php
+
 namespace controllers;
+
 use services\UIService;
 use Ubiquity\utils\http\URequest;
 use models\Qcm;
@@ -8,9 +10,10 @@ use models\Question;
 
 /**
  * Controller MonTest
- *  
- * 
+ *
+ *
  * @property \Ajax\php\ubiquity\JsUtils $jquery
+<<<<<<< HEAD
 **/
   
 class MonTest extends ControllerBase{
@@ -51,6 +54,18 @@ class MonTest extends ControllerBase{
 	    $qcm = new Qcm();
 	    URequest::setValuesToObject ( $qcm );
 	    DAO::insert ( $qcm );
+=======
+ */
+class MonTest extends ControllerBase {
+	private $uiService;
+	public function initialize() {
+		parent::initialize ();
+		$this->uiService = new UIService ( $this->jquery );
+	}
+	public function index() {
+		echo "";
+		$this->loadView ( "MonTest/index.html" );
+>>>>>>> c33041add9fab61c55420dd3de762502a4ef827c
 	}
 }
 

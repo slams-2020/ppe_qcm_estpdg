@@ -24,11 +24,12 @@ return array(
   'models\\Question::$points' => array(
     array('#name' => 'column', '#type' => 'Ubiquity\\annotations\\ColumnAnnotation', "name"=>"points","nullable"=>true,"dbType"=>"int(11)")
   ),
-  'models\\Question::$tags' => array(
-    array('#name' => 'column', '#type' => 'Ubiquity\\annotations\\ColumnAnnotation', "name"=>"tags","nullable"=>true,"dbType"=>"text")
-  ),
   'models\\Question::$answers' => array(
     array('#name' => 'oneToMany', '#type' => 'Ubiquity\\annotations\\OneToManyAnnotation', "mappedBy"=>"question","className"=>"models\\Answer")
+  ),
+  'models\\Question::$typeq' => array(
+    array('#name' => 'manyToOne', '#type' => 'Ubiquity\\annotations\\ManyToOneAnnotation'),
+    array('#name' => 'joinColumn', '#type' => 'Ubiquity\\annotations\\JoinColumnAnnotation', "className"=>"models\\Typeq","name"=>"idType","nullable"=>false)
   ),
   'models\\Question::$user' => array(
     array('#name' => 'manyToOne', '#type' => 'Ubiquity\\annotations\\ManyToOneAnnotation'),

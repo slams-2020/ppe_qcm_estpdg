@@ -23,14 +23,15 @@ class Question{
 	private $points;
 
 	/**
-	 * @column("name"=>"tags","nullable"=>true,"dbType"=>"text")
-	*/
-	private $tags;
-
-	/**
 	 * @oneToMany("mappedBy"=>"question","className"=>"models\\Answer")
 	*/
 	private $answers;
+
+	/**
+	 * @manyToOne
+	 * @joinColumn("className"=>"models\\Typeq","name"=>"idType","nullable"=>false)
+	*/
+	private $typeq;
 
 	/**
 	 * @manyToOne
@@ -68,14 +69,6 @@ class Question{
 		$this->points=$points;
 	}
 
-	 public function getTags(){
-		return $this->tags;
-	}
-
-	 public function setTags($tags){
-		$this->tags=$tags;
-	}
-
 	 public function getAnswers(){
 		return $this->answers;
 	}
@@ -86,6 +79,14 @@ class Question{
 
 	 public function addAnswer($answer){
 		$this->answers[]=$answer;
+	}
+
+	 public function getTypeq(){
+		return $this->typeq;
+	}
+
+	 public function setTypeq($typeq){
+		$this->typeq=$typeq;
 	}
 
 	 public function getUser(){

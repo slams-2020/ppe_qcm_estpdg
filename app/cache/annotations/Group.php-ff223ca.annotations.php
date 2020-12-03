@@ -27,12 +27,13 @@ return array(
   'models\\Group::$exams' => array(
     array('#name' => 'oneToMany', '#type' => 'Ubiquity\\annotations\\OneToManyAnnotation', "mappedBy"=>"group","className"=>"models\\Exam")
   ),
-  'models\\Group::$usergroups' => array(
-    array('#name' => 'oneToMany', '#type' => 'Ubiquity\\annotations\\OneToManyAnnotation', "mappedBy"=>"group","className"=>"models\\Usergroup")
-  ),
   'models\\Group::$user' => array(
     array('#name' => 'manyToOne', '#type' => 'Ubiquity\\annotations\\ManyToOneAnnotation'),
     array('#name' => 'joinColumn', '#type' => 'Ubiquity\\annotations\\JoinColumnAnnotation', "className"=>"models\\User","name"=>"idUser","nullable"=>false)
+  ),
+  'models\\Group::$users' => array(
+    array('#name' => 'manyToMany', '#type' => 'Ubiquity\\annotations\\ManyToManyAnnotation', "targetEntity"=>"models\\User","inversedBy"=>"groups"),
+    array('#name' => 'joinTable', '#type' => 'Ubiquity\\annotations\\JoinTableAnnotation', "name"=>"usergroup")
   ),
 );
 
