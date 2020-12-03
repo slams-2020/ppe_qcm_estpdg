@@ -54,8 +54,9 @@ return array(
   'models\\User::$useranswers' => array(
     array('#name' => 'oneToMany', '#type' => 'Ubiquity\\annotations\\OneToManyAnnotation', "mappedBy"=>"user","className"=>"models\\Useranswer")
   ),
-  'models\\User::$usergroups' => array(
-    array('#name' => 'oneToMany', '#type' => 'Ubiquity\\annotations\\OneToManyAnnotation', "mappedBy"=>"user","className"=>"models\\Usergroup")
+  'models\\User::$groups1' => array(
+    array('#name' => 'manyToMany', '#type' => 'Ubiquity\\annotations\\ManyToManyAnnotation', "targetEntity"=>"models\\Group","inversedBy"=>"users"),
+    array('#name' => 'joinTable', '#type' => 'Ubiquity\\annotations\\JoinTableAnnotation', "name"=>"usergroup")
   ),
 );
 
