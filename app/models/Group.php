@@ -8,35 +8,36 @@ class Group{
 	 * @id
 	 * @column("name"=>"id","nullable"=>false,"dbType"=>"int(11)")
 	 * @validator("id","constraints"=>array("autoinc"=>true))
-	**/
+	*/
 	private $id;
 
 	/**
 	 * @column("name"=>"name","nullable"=>true,"dbType"=>"varchar(42)")
 	 * @validator("length","constraints"=>array("max"=>42))
-	**/
+	*/
 	private $name;
 
 	/**
 	 * @column("name"=>"description","nullable"=>true,"dbType"=>"text")
-	**/
+	*/
 	private $description;
 
 	/**
 	 * @oneToMany("mappedBy"=>"group","className"=>"models\\Exam")
-	**/
+	*/
 	private $exams;
-
-	/**
-	 * @oneToMany("mappedBy"=>"group","className"=>"models\\Usergroup")
-	**/
-	private $usergroups;
 
 	/**
 	 * @manyToOne
 	 * @joinColumn("className"=>"models\\User","name"=>"idUser","nullable"=>false)
-	**/
+	*/
 	private $user;
+
+	/**
+	 * @manyToMany("targetEntity"=>"models\\User","inversedBy"=>"groups")
+	 * @joinTable("name"=>"usergroup")
+	*/
+	private $users;
 
 	 public function getId(){
 		return $this->id;
@@ -70,12 +71,8 @@ class Group{
 		$this->exams=$exams;
 	}
 
-	 public function getUsergroups(){
-		return $this->usergroups;
-	}
-
-	 public function setUsergroups($usergroups){
-		$this->usergroups=$usergroups;
+	 public function addExam($exam){
+		$this->exams[]=$exam;
 	}
 
 	 public function getUser(){
@@ -84,6 +81,18 @@ class Group{
 
 	 public function setUser($user){
 		$this->user=$user;
+	}
+
+	 public function getUsers(){
+		return $this->users;
+	}
+
+	 public function setUsers($users){
+		$this->users=$users;
+	}
+
+	 public function addUser($user){
+		$this->users[]=$user;
 	}
 
 	 public function __toString(){

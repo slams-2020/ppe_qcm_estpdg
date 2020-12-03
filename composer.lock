@@ -726,20 +726,20 @@
         },
         {
             "name": "phpmv/ubiquity-dev",
-            "version": "0.0.21",
+            "version": "0.0.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpMv/ubiquity-dev.git",
-                "reference": "6fdb18ecab61adcf48384cac49f72daf659fa787"
+                "reference": "ae91b1bc330e87365ab0d98e8e64341d87189a95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpMv/ubiquity-dev/zipball/6fdb18ecab61adcf48384cac49f72daf659fa787",
-                "reference": "6fdb18ecab61adcf48384cac49f72daf659fa787",
+                "url": "https://api.github.com/repos/phpMv/ubiquity-dev/zipball/ae91b1bc330e87365ab0d98e8e64341d87189a95",
+                "reference": "ae91b1bc330e87365ab0d98e8e64341d87189a95",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.4"
+                "php": ">=7.4"
             },
             "type": "extension",
             "extra": {
@@ -774,9 +774,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpMv/ubiquity-dev/issues",
-                "source": "https://github.com/phpMv/ubiquity-dev/tree/0.0.21"
+                "source": "https://github.com/phpMv/ubiquity-dev/tree/0.0.23"
             },
-            "time": "2020-11-28T15:07:10+00:00"
+            "time": "2020-12-03T02:08:32+00:00"
         },
         {
             "name": "phpmv/ubiquity-webtools",
