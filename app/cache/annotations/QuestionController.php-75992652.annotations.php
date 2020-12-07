@@ -14,5 +14,8 @@ return array(
   array (
   ),
 ),
+  'controllers\\QuestionController::index' => array(
+    array('#name' => 'route', '#type' => 'Ubiquity\\annotations\\router\\RouteAnnotation', '_default')
+  ),
 );
 

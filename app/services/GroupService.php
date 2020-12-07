@@ -17,22 +17,12 @@ class GroupService {
 		$frm->setFields ( [ 
 				'name',
 				'description',
-				'idUser',
 				'submit'
 		] );
 		$frm->fieldAsInput ( 'name', [ 
 				'rules' => [ 
 						'empty'
 				]
-		] );
-		$frm->fieldAsInput ( 'idUser', [ 
-				'rules' => [ 
-						'empty'
-				]
-		] );
-		$frm->setValidationParams ( [ 
-				"on" => "blur",
-				"inline" => true
 		] );
 		return $frm;
 	}

@@ -4,6 +4,7 @@ namespace controllers;
 
 use Ubiquity\orm\DAO;
 use Ubiquity\utils\http\URequest;
+use Ubiquity\utils\http\USession;
 use models\Group;
 use services\GroupService;
 
@@ -35,6 +36,7 @@ class GroupController extends ControllerBase {
 	public function submit() {
 		$group = new Group ();
 		URequest::setValuesToObject ( $group );
+		$group->setUser ( USession::get ( "activeUser" ) );
 		DAO::insert ( $group );
 	}
 }
