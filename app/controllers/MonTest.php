@@ -16,24 +16,6 @@ use services\UIService;
 
 **/
   
-class MonTest extends ControllerBase{
-
-    private $uiService;
-    public function initialize() {
-        parent::initialize ();
-        $this->uiService = new UIService( $this->jquery );
-    }
-    
-	public function index(){
-	    $frm = $this->uiService->qcmForm (new Qcm());
-	   
-	    $frm->fieldAsSubmit ( 'submit', 'blue', 'MonTest/submit', '#response', [
-	        'ajax' => [
-	            'hasLoader' => 'internal'
-	        ]
-	    ] ); 
-	    $this->jquery->renderView("MonTest/index.html");
-
  
 class MonTest extends ControllerBase {
 	private $uiService;
@@ -73,13 +55,13 @@ class MonTest extends ControllerBase {
 	    }
 	    
 	    public  function ajoutQuestionQcm(){
-	       // $frm = $this->uiService->
+	       // $frm = $this->uiService->qcmAjoutQuestion();
 	    }
 
 	    
 		
 	}
 
-}
 
-}
+
+

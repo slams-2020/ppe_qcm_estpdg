@@ -20,8 +20,8 @@ class UIService {
 
 
 	
-	public function qcmForm($q) {
-	    $frm =$this->jquery->semantic ()->dataForm ( 'form',$q );
+	public function qcmForm() {
+	    $frm =$this->jquery->semantic ()->dataForm ( 'form',Qcm::class );
 	    $frm->setFields ( [
 	        'QCM Name',
 	        'Description',
@@ -30,6 +30,7 @@ class UIService {
 	        'Questions',
 	        'submit'
 	    ] );
+	   
 	    $frm->fieldAsInput ( 'name', [
 	        'rules' => [
 	            'empty'

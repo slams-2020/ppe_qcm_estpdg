@@ -7,6 +7,7 @@ return array(
   'URequest' => 'Ubiquity\\utils\\http\\URequest',
   'USession' => 'Ubiquity\\utils\\http\\USession',
   'Group' => 'models\\Group',
+  'User' => 'models\\User',
   'GroupService' => 'services\\GroupService',
 ),
   '#traitMethodOverrides' => array (
