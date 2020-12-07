@@ -1,6 +1,7 @@
 body{
 	background: rgb(79,160,174);
 	background-image: url(../img/fond.jpg);
+	width:1920px;
 }
 .head{
 	background-color: #1f1f1f;
