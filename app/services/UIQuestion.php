@@ -20,10 +20,6 @@ class UIQuestion {
 				'selection',
 				'Valider'
 		] );
-		$frm->fieldAsDropDown ( 'selection', [ 
-				'qcm',
-				'ouverte'
-		] );
 		$frm->setValidationParams ( [ 
 				"on" => "blur",
 				"inline" => true
