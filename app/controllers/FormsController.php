@@ -7,6 +7,7 @@ use Ubiquity\utils\http\URequest;
 use models\User;
 use services\UIService;
 
+
 /**
  * Controller FormsController
  *
@@ -16,7 +17,7 @@ class FormsController extends ControllerBase {
 	private $uiService;
 	public function initialize() {
 		parent::initialize ();
-		$this->uiService = new UIService ( $this->jquery );
+		$this->uiService = new UIService( $this->jquery );
 	}
 	public function index() {
 		$frm = $this->uiService->userForm ();

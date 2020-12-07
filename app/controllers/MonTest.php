@@ -13,7 +13,10 @@ use services\UIService;
  *
  *
  * @property \Ajax\php\ubiquity\JsUtils $jquery
- */
+
+**/
+  
+ 
 class MonTest extends ControllerBase {
 	private $uiService;
 	public function initialize() {
@@ -29,6 +32,7 @@ class MonTest extends ControllerBase {
 				]
 		] );
 		$this->jquery->renderView ( "MonTest/index.html" );
+
 	}
 	public function affichageQuestions() {
 		$frm = $this->uiService->qcmForm ();
@@ -43,11 +47,21 @@ class MonTest extends ControllerBase {
 		echo $type->getCaption ();
 	}
 	public function submit() {
-		$qcm = new Qcm ();
-		URequest::setValuesToObject ( $qcm );
-		DAO::insert ( $qcm );
+
+	    $qcm = new Qcm();
+	    URequest::setValuesToObject ( $qcm );
+	    DAO::insert ( $qcm );
+	    $this->jquery->renderView("MonTest/qcm.html");
+	    }
+	    
+	    public  function ajoutQuestionQcm(){
+	       // $frm = $this->uiService->qcmAjoutQuestion();
+	    }
+
+	    
+		
 	}
-}
+
 
 
 

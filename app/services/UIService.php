@@ -17,45 +17,55 @@ class UIService {
 		$this->jquery = $jq;
 		$this->semantic = $jq->semantic ();
 	}
-	public function qcmForm() {
-		$q = new Qcm ();
-		$frm = $this->jquery->semantic ()->dataForm ( 'form', $q );
-		$frm->setFields ( [ 
-				'QCM Name',
-				'Description',
-				'cDate',
-				'Status',
-				'Questions',
-				'submit'
-		] );
-		$frm->fieldAsInput ( 'name', [ 
-				'rules' => [ 
-						'empty'
-				]
-		] );
-		$frm->fieldAsInput ( 'description', [ 
-				'rules' => [ 
-						'empty'
-				]
-		] );
-		$frm->fieldAsInput ( 'cdate', [ 
-				'rules' => [ 
-						'empty'
-				]
-		] );
-		$frm->fieldAsInput ( 'status', [ 
-				'inputType' => 'status',
-				'rules' => [ 
-						'length[1]',
-						'Donnez un status !'
-				]
-		] );
 
-		$questions = DAO::getAll ( Question::class );
-		$q->setQuestions ( \current ( $questions ) );
-		$frm->fieldAsDropDown ( 'Questions', JArray::modelArray ( $questions, 'getId' ) );
-		return $frm;
+
+	
+	public function qcmForm() {
+	    $frm =$this->jquery->semantic ()->dataForm ( 'form',Qcm::class );
+	    $frm->setFields ( [
+	        'QCM Name',
+	        'Description',
+	        'cDate',
+	        'Status',
+	        'Questions',
+	        'submit'
+	    ] );
+	   
+	    $frm->fieldAsInput ( 'name', [
+	        'rules' => [
+	            'empty'
+	        ]
+	    ] );
+	    $frm->fieldAsInput ( 'description', [
+	        'rules' => [
+	            'empty'
+	        ]
+	    ] );
+	    $frm->fieldAsInput ( 'cdate', [
+	        'rules' => [
+	            'empty'
+	        ]
+	    ] );
+	    $frm->fieldAsInput ( 'status', [
+	        'inputType' => 'status',
+	        'rules' => [
+	            'length[1]',
+	            'Donnez un status !'
+	        ]
+	    ] );
+	  
+	        $questions = DAO::getAll ( Question::class );
+	        ///$q->setQuestions( current ( $questions ) );
+	        $frm->fieldAsDropDown ( 'Questions', JArray::modelArray ( $questions, 'getId','getCaption' ),true );
+	        
+	        return $frm;
+	        
+	   
+	    
+	    
 	}
+	
+
 	public function questionForm() {
 		$q = new Question ();
 		$frm = $this->jquery->semantic ()->dataForm ( 'form', $q );

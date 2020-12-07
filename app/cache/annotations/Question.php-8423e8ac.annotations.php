@@ -18,8 +18,8 @@ return array(
     array('#name' => 'validator', '#type' => 'Ubiquity\\annotations\\ValidatorAnnotation', "id","constraints"=>array("autoinc"=>true))
   ),
   'models\\Question::$caption' => array(
-    array('#name' => 'column', '#type' => 'Ubiquity\\annotations\\ColumnAnnotation', "name"=>"caption","nullable"=>true,"dbType"=>"varchar(42)"),
-    array('#name' => 'validator', '#type' => 'Ubiquity\\annotations\\ValidatorAnnotation', "length","constraints"=>array("max"=>42))
+    array('#name' => 'column', '#type' => 'Ubiquity\\annotations\\ColumnAnnotation', "name"=>"caption","nullable"=>true,"dbType"=>"varchar(200)"),
+    array('#name' => 'validator', '#type' => 'Ubiquity\\annotations\\ValidatorAnnotation', "length","constraints"=>array("max"=>200))
   ),
   'models\\Question::$points' => array(
     array('#name' => 'column', '#type' => 'Ubiquity\\annotations\\ColumnAnnotation', "name"=>"points","nullable"=>true,"dbType"=>"int(11)")
