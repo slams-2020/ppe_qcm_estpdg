@@ -18,13 +18,23 @@ class UIService {
 		$this->semantic = $jq->semantic ();
 	}
 
-
+	public  function qcmQuestionForm(){
+	    $frm = $this->jquery->semantic()->dataElement("form", Qcm::class);
+	    $frm->setFields([
+	        'QCM Name',
+	        'Description',
+	        'cDate',
+	        'Status'	        
+	    ]);
+	    
+	    
+	}
 	
 	public function qcmForm() {
 	    $frm =$this->jquery->semantic ()->dataForm ( 'form',Qcm::class );
 	    $frm->setFields ( [
-	        'QCM Name',
-	        'Description',
+	        'name',
+	        'description',
 	        'cDate',
 	        'Status',
 	        'Questions',
