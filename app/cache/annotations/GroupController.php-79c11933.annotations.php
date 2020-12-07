@@ -3,14 +3,11 @@
 return array(
   '#namespace' => 'controllers',
   '#uses' => array (
-  'GroupControllerDatas' => 'controllers\\crud\\datas\\GroupControllerDatas',
-  'CRUDDatas' => 'Ubiquity\\controllers\\crud\\CRUDDatas',
-  'GroupControllerViewer' => 'controllers\\crud\\viewers\\GroupControllerViewer',
-  'ModelViewer' => 'Ubiquity\\controllers\\crud\\viewers\\ModelViewer',
-  'GroupControllerEvents' => 'controllers\\crud\\events\\GroupControllerEvents',
-  'CRUDEvents' => 'Ubiquity\\controllers\\crud\\CRUDEvents',
-  'GroupControllerFiles' => 'controllers\\crud\\files\\GroupControllerFiles',
-  'CRUDFiles' => 'Ubiquity\\controllers\\crud\\CRUDFiles',
+  'DAO' => 'Ubiquity\\orm\\DAO',
+  'URequest' => 'Ubiquity\\utils\\http\\URequest',
+  'USession' => 'Ubiquity\\utils\\http\\USession',
+  'Group' => 'models\\Group',
+  'GroupService' => 'services\\GroupService',
 ),
   '#traitMethodOverrides' => array (
   'controllers\\GroupController' => 
@@ -18,6 +15,7 @@ return array(
   ),
 ),
   'controllers\\GroupController' => array(
+    array('#name' => 'property', '#type' => 'mindplay\\annotations\\standard\\PropertyAnnotation', 'type' => '\\Ajax\\php\\ubiquity\\JsUtils', 'name' => 'jquery'),
     array('#name' => 'route', '#type' => 'Ubiquity\\annotations\\router\\RouteAnnotation', "/Groups","inherited"=>true,"automated"=>true)
   ),
 );

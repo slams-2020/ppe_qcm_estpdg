@@ -22,4 +22,3 @@ class LoginController extends ControllerBase {
 	public function index() {
 	}
 }
-

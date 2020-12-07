@@ -25,7 +25,7 @@ class MonTest extends ControllerBase{
     }
     
 	public function index(){
-	    $frm = $this->uiService->qcmForm ();
+	    $frm = $this->uiService->qcmForm (new Qcm());
 	   
 	    $frm->fieldAsSubmit ( 'submit', 'blue', 'MonTest/submit', '#response', [
 	        'ajax' => [
@@ -54,11 +54,12 @@ class MonTest extends ControllerBase{
 	    $qcm = new Qcm();
 	    URequest::setValuesToObject ( $qcm );
 	    DAO::insert ( $qcm );
-
-
-	
+	    $this->jquery->renderView("MonTest/qcm.html");
+	    }
+	    
+	    public  function ajoutQuestionQcm(){
+	       // $frm = $this->uiService->
+	    }
 }
-}
-
 
 

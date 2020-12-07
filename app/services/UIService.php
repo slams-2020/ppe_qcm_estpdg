@@ -20,8 +20,7 @@ class UIService {
 	}
 
 	
-	public function qcmForm() {
-	    $q =  new Qcm();
+	public function qcmForm($q) {
 	    $frm =$this->jquery->semantic ()->dataForm ( 'form',$q );
 	    $frm->setFields ( [
 	        'QCM Name',
@@ -55,8 +54,9 @@ class UIService {
 	    ] );
 	  
 	        $questions = DAO::getAll ( Question::class );
-	        $q->setQuestions( current ( $questions ) );
-	        $frm->fieldAsDropDown ( 'Questions', JArray::modelArray ( $questions, 'getId' ) );
+	        ///$q->setQuestions( current ( $questions ) );
+	        $frm->fieldAsDropDown ( 'Questions', JArray::modelArray ( $questions, 'getId','getCaption' ),true );
+	        
 	        return $frm;
 	        
 	   
