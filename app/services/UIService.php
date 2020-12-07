@@ -3,13 +3,12 @@
 namespace services;
 
 use Ajax\php\ubiquity\JsUtils;
-use Ubiquity\orm\DAO;
-use models\Question;
-use models\User;
-use models\Qcm;
 use Ajax\service\JArray;
+use Ubiquity\orm\DAO;
+use models\Qcm;
+use models\Question;
 use models\Typeq;
-
+use models\User;
 
 class UIService {
 	protected $jquery;
@@ -18,70 +17,87 @@ class UIService {
 		$this->jquery = $jq;
 		$this->semantic = $jq->semantic ();
 	}
-
-	
 	public function qcmForm() {
-	    $q =  new Qcm();
-	    $frm =$this->jquery->semantic ()->dataForm ( 'form',$q );
-	    $frm->setFields ( [
-	        'QCM Name',
-	        'Description',
-	        'cDate',
-	        'Status',
-	        'Questions',
-	        'submit'
-	    ] );
-	    $frm->fieldAsInput ( 'name', [
-	        'rules' => [
-	            'empty'
-	        ]
-	    ] );
-	    $frm->fieldAsInput ( 'description', [
-	        'rules' => [
-	            'empty'
-	        ]
-	    ] );
-	    $frm->fieldAsInput ( 'cdate', [
-	        'rules' => [
-	            'empty'
-	        ]
-	    ] );
-	    $frm->fieldAsInput ( 'status', [
-	        'inputType' => 'status',
-	        'rules' => [
-	            'length[1]',
-	            'Donnez un status !'
-	        ]
-	    ] );
-	  
-	        $questions = DAO::getAll ( Question::class );
-	        $q->setQuestions( current ( $questions ) );
-	        $frm->fieldAsDropDown ( 'Questions', JArray::modelArray ( $questions, 'getId' ) );
-	        return $frm;
-	        
-	   
-	    
-	    
-	}
-	
+		$q = new Qcm ();
+		$frm = $this->jquery->semantic ()->dataForm ( 'form', $q );
+		$frm->setFields ( [ 
+				'QCM Name',
+				'Description',
+				'cDate',
+				'Status',
+				'Questions',
+				'submit'
+		] );
+		$frm->fieldAsInput ( 'name', [ 
+				'rules' => [ 
+						'empty'
+				]
+		] );
+		$frm->fieldAsInput ( 'description', [ 
+				'rules' => [ 
+						'empty'
+				]
+		] );
+		$frm->fieldAsInput ( 'cdate', [ 
+				'rules' => [ 
+						'empty'
+				]
+		] );
+		$frm->fieldAsInput ( 'status', [ 
+				'inputType' => 'status',
+				'rules' => [ 
+						'length[1]',
+						'Donnez un status !'
+				]
+		] );
 
+		$questions = DAO::getAll ( Question::class );
+		$q->setQuestions ( \current ( $questions ) );
+		$frm->fieldAsDropDown ( 'Questions', JArray::modelArray ( $questions, 'getId' ) );
+		return $frm;
+	}
 	public function questionForm() {
 		$q = new Question ();
 		$frm = $this->jquery->semantic ()->dataForm ( 'form', $q );
 		$frm->setFields ( [ 
 				'caption',
-				'typeq'
+				'typeq',
+				'points',
+				'submit'
+		] );
+		$frm->setCaptions ( [ 
+				'Intitulé de la question',
+				'Type de question',
+				'Points de la question',
+				'Valider'
+		] );
+		$frm->fieldAsInput ( 'caption', [ 
+				'rules' => [ 
+						'empty'
+				]
+		] );
+		$frm->fieldAsInput ( 'typeq', [ 
+				'rules' => [ 
+						'empty'
+				]
+		] );
+		$frm->fieldAsInput ( 'points', [ 
+				'rules' => [ 
+						'empty'
+				]
 		] );
 		$types = DAO::getAll ( Typeq::class );
-		$q->setTypeq ( current ( $types ) );
+		$q->setTypeq ( (\current ( $types ))->getId () );
 		$frm->fieldAsDropDown ( 'typeq', JArray::modelArray ( $types, 'getId' ) );
+		$frm->fieldAsInput ( 'Points', [ 
+				'inputType' => 'number'
+		] );
 		$frm->setValidationParams ( [ 
 				"on" => "blur",
 				"inline" => true
 		] );
 		return $frm;
 	}
-
 	public function userForm() {
 		$frm = $this->jquery->semantic ()->dataForm ( 'form', new User () );
 		$frm->setFields ( [ 

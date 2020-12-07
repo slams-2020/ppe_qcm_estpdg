@@ -23,17 +23,19 @@ class QuestionController extends ControllerBase {
 	 */
 	public function index() {
 		$frm = $this->UIService->questionForm ();
-		$frm->fieldAsSubmit ( 'Valider', 'green', 'QuestionController/submit', '', [ 
+		$frm->fieldAsSubmit ( 'submit', 'teal', 'QuestionController/submit', '', [ 
 				'ajax' => [ 
 						'hasLoader' => 'internal'
 				]
 		] );
 
-		$this->jquery->renderView ( "QuestionController/index.html" );
+		$this->jquery->renderView ( "QuestionController/question.html" );
 	}
 	public function submit() {
 		$question = new Question ();
 		URequest::setValuesToObject ( $question );
+		$typeQ = DAO::getById ( Typeq::class, URequest::post ( 'typeq' ) );
+		$question->setTypeq ( $typeQ );
 		DAO::insert ( $question );
 	}
 	public function question() {
