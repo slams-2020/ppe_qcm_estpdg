@@ -17,19 +17,8 @@ class QuestionController extends ControllerBase {
 		parent::initialize ();
 		$this->UIService = new UIService ( $this->jquery );
 	}
-	/**
-	 *
-	 * @route('_default')
-	 */
 	public function index() {
-		$frm = $this->UIService->questionForm ();
-		$frm->fieldAsSubmit ( 'submit', 'teal', 'QuestionController/submit', '', [ 
-				'ajax' => [ 
-						'hasLoader' => 'internal'
-				]
-		] );
-
-		$this->jquery->renderView ( "QuestionController/question.html" );
+		$this->loadView ( "QuestionController/index.html" );
 	}
 	public function submit() {
 		$question = new Question ();
@@ -40,6 +29,11 @@ class QuestionController extends ControllerBase {
 	}
 	public function question() {
 		$frm = $this->UIService->questionForm ();
+		$frm->fieldAsSubmit ( 'submit', 'teal', 'QuestionController/submit', '', [ 
+				'ajax' => [ 
+						'hasLoader' => 'internal'
+				]
+		] );
 		$this->jquery->getOnClick ( '#dropdown-form-typeq-0 .item', 'QuestionController/detailsQ', '#response', [ 
 				'attr' => 'data-value',
 				'hasLoader' => false
