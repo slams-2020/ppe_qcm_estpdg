@@ -13,7 +13,7 @@ class LoginController extends ControllerBase {
 
 	/**
 	 *
-	 * @route(/connect)
+	 * @route("/connect")
 	 */
 	public function connect() {
 		$user = DAO::getOne ( User::class, '1=1' );
