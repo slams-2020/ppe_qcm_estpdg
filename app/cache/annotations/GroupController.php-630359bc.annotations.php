@@ -5,6 +5,7 @@ return array(
   '#uses' => array (
   'DAO' => 'Ubiquity\\orm\\DAO',
   'URequest' => 'Ubiquity\\utils\\http\\URequest',
+  'USession' => 'Ubiquity\\utils\\http\\USession',
   'Group' => 'models\\Group',
   'GroupService' => 'services\\GroupService',
 ),
