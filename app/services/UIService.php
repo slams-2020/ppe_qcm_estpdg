@@ -18,29 +18,47 @@ class UIService {
 		$this->semantic = $jq->semantic ();
 	}
 
-	public  function qcmQuestionForm(){
-	    $frm = $this->jquery->semantic()->dataElement("form", Qcm::class);
+	public  function qcmAjoutQuestionForm($qcm){	   
+	    $dernierQcm = DAO::getById(Qcm::class, $qcm->getId());
+	    $frm = $this->jquery->semantic()->dataElement("form", $dernierQcm);
+	    $questions = DAO::getAll(Question::class);
 	    $frm->setFields([
-	        'QCM Name',
-	        'Description',
-	        'cDate',
-	        'Status'	        
+	        'name',
+	        'description',
+	        'cdate',
+	        'status',
+	        'questions'       
 	    ]);
-	    
-	    
+	    $frm->setCaptions([
+	        'Nom du QCM',
+	        'Description du QCM',
+	        'Date de creation',
+	        'Statut du QCM',
+	        'Question'
+	    ]);
+	    $frm->fieldAsDataList('questions', JArray::modelArray ( $questions, 'getId','getCaption' ) );
+	  
+	      
+	    return $frm;	    
 	}
 	
 	public function qcmForm() {
-	    $frm =$this->jquery->semantic ()->dataForm ( 'form',Qcm::class );
+	    $qcm=new Qcm();
+	    $qcm->setStatus(true);
+	    $frm =$this->jquery->semantic ()->dataForm ( 'form',$qcm );
 	    $frm->setFields ( [
 	        'name',
-	        'description',
-	        'cDate',
-	        'Status',
-	        'Questions',
+	        'description',	        
+	        'status',	       
 	        'submit'
 	    ] );
+	    $frm->setCaptions([
+	         'Nom du QCM',
+	        'Description du QCM',
+	        'Actif',
+	        ]);
 	   
+	  
 	    $frm->fieldAsInput ( 'name', [
 	        'rules' => [
 	            'empty'
@@ -50,29 +68,14 @@ class UIService {
 	        'rules' => [
 	            'empty'
 	        ]
+	    ] );	    	    
+	    $frm->fieldAsCheckbox( 'status', [
+	        
 	    ] );
-	    $frm->fieldAsInput ( 'cdate', [
-	        'rules' => [
-	            'empty'
-	        ]
-	    ] );
-	    $frm->fieldAsInput ( 'status', [
-	        'inputType' => 'status',
-	        'rules' => [
-	            'length[1]',
-	            'Donnez un status !'
-	        ]
-	    ] );
-	  
-	        $questions = DAO::getAll ( Question::class );
+	        //$questions = DAO::getAll ( Question::class );
 	        ///$q->setQuestions( current ( $questions ) );
-	        $frm->fieldAsDropDown ( 'Questions', JArray::modelArray ( $questions, 'getId','getCaption' ),true );
-	        
-	        return $frm;
-	        
-	   
-	    
-	    
+	        //$frm->fieldAsDropDown ( 'Questions', JArray::modelArray ( $questions, 'getId','getCaption' ),true );        
+	        return $frm;	    
 	}
 	
 
@@ -96,16 +99,22 @@ class UIService {
 						'empty'
 				]
 		] );
+		$frm->fieldAsInput ( 'typeq', [ 
+				'rules' => [ 
+						'empty'
+				]
+		] );
 		$frm->fieldAsInput ( 'points', [ 
-				'inputType' => 'number',
 				'rules' => [ 
 						'empty'
 				]
 		] );
 		$types = DAO::getAll ( Typeq::class );
-		// $q->setTypeq ( (\current ( $types ))->getId () );
-		$q->setTypeq ( 1 );
+		$q->setTypeq ( (\current ( $types ))->getId () );
 		$frm->fieldAsDropDown ( 'typeq', JArray::modelArray ( $types, 'getId' ) );
+		$frm->fieldAsInput ( 'Points', [ 
+				'inputType' => 'number'
+		] );
 		$frm->setValidationParams ( [ 
 				"on" => "blur",
 				"inline" => true
