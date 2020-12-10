@@ -53,5 +53,8 @@ class GroupController extends ControllerBase {
 		URequest::setValuesToObject ( $group );
 		$group->setUser ( USession::get ( "activeUser" ) );
 		DAO::insert ( $group );
+		$frm = $this->GroupService->GroupAjoutForm ( $group );
+		$this->jquery->doJQuery ( '#form', 'html', "" );
+		$this->jquery->renderView ( "GroupController/menu.html" );
 	}
 }

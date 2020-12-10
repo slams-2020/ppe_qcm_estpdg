@@ -17,68 +17,60 @@ class UIService {
 		$this->jquery = $jq;
 		$this->semantic = $jq->semantic ();
 	}
+	public function qcmAjoutQuestionForm($qcm) {
+		$dernierQcm = DAO::getById ( Qcm::class, $qcm->getId () );
+		$frm = $this->jquery->semantic ()->dataElement ( "form", $dernierQcm );
+		$questions = DAO::getAll ( Question::class );
+		$frm->setFields ( [ 
+				'name',
+				'description',
+				'cdate',
+				'status',
+				'questions'
+		] );
+		$frm->setCaptions ( [ 
+				'Nom du QCM',
+				'Description du QCM',
+				'Date de creation',
+				'Statut du QCM',
+				'Question'
+		] );
+		$frm->fieldAsDataList ( 'questions', JArray::modelArray ( $questions, 'getId', 'getCaption' ) );
 
-	public  function qcmAjoutQuestionForm($qcm){	   
-	    $dernierQcm = DAO::getById(Qcm::class, $qcm->getId());
-	    $frm = $this->jquery->semantic()->dataElement("form", $dernierQcm);
-	    $questions = DAO::getAll(Question::class);
-	    $frm->setFields([
-	        'name',
-	        'description',
-	        'cdate',
-	        'status',
-	        'questions'       
-	    ]);
-	    $frm->setCaptions([
-	        'Nom du QCM',
-	        'Description du QCM',
-	        'Date de creation',
-	        'Statut du QCM',
-	        'Question'
-	    ]);
-	    $frm->fieldAsDataList('questions', JArray::modelArray ( $questions, 'getId','getCaption' ) );
-	  
-	      
-	    return $frm;	    
+		return $frm;
 	}
-	
 	public function qcmForm() {
-	    $qcm=new Qcm();
-	    $qcm->setStatus(true);
-	    $frm =$this->jquery->semantic ()->dataForm ( 'form',$qcm );
-	    $frm->setFields ( [
-	        'name',
-	        'description',	        
-	        'status',	       
-	        'submit'
-	    ] );
-	    $frm->setCaptions([
-	         'Nom du QCM',
-	        'Description du QCM',
-	        'Actif',
-	        ]);
-	   
-	  
-	    $frm->fieldAsInput ( 'name', [
-	        'rules' => [
-	            'empty'
-	        ]
-	    ] );
-	    $frm->fieldAsInput ( 'description', [
-	        'rules' => [
-	            'empty'
-	        ]
-	    ] );	    	    
-	    $frm->fieldAsCheckbox( 'status', [
-	        
-	    ] );
-	        //$questions = DAO::getAll ( Question::class );
-	        ///$q->setQuestions( current ( $questions ) );
-	        //$frm->fieldAsDropDown ( 'Questions', JArray::modelArray ( $questions, 'getId','getCaption' ),true );        
-	        return $frm;	    
-	}
-	
+		$qcm = new Qcm ();
+		$qcm->setStatus ( true );
+		$frm = $this->jquery->semantic ()->dataForm ( 'form', $qcm );
+		$frm->setFields ( [ 
+				'name',
+				'description',
+				'status',
+				'submit'
+		] );
+		$frm->setCaptions ( [ 
+				'Nom du QCM',
+				'Description du QCM',
+				'Actif'
+		] );
 
+		$frm->fieldAsInput ( 'name', [ 
+				'rules' => [ 
+						'empty'
+				]
+		] );
+		$frm->fieldAsInput ( 'description', [ 
+				'rules' => [ 
+						'empty'
+				]
+		] );
+		$frm->fieldAsCheckbox ( 'status', [ ] );
+		// $questions = DAO::getAll ( Question::class );
+		// /$q->setQuestions( current ( $questions ) );
+		// $frm->fieldAsDropDown ( 'Questions', JArray::modelArray ( $questions, 'getId','getCaption' ),true );
+		return $frm;
+	}
 	public function questionForm() {
 		$q = new Question ();
 		$frm = $this->jquery->semantic ()->dataForm ( 'form', $q );

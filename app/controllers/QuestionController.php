@@ -29,7 +29,7 @@ class QuestionController extends ControllerBase {
 	}
 	public function question() {
 		$frm = $this->UIService->questionForm ();
-		$frm->fieldAsSubmit ( 'submit', 'teal', 'QuestionController/submit', '', [ 
+		$frm->fieldAsSubmit ( 'submit', 'blue', 'QuestionController/submit', '', [ 
 				'ajax' => [ 
 						'hasLoader' => 'internal'
 				]
