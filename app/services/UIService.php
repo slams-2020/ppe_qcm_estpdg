@@ -18,8 +18,21 @@ class UIService {
 		$this->semantic = $jq->semantic ();
 	}
 
-	public  function qcmAjoutQuestionForm($qcm){	   
-	    $dernierQcm = DAO::getById(Qcm::class, $qcm->getId());
+	public function qcmListe() {
+	    $qcms = DAO::getAll(Qcm::class);
+	    $this->jquery->renderView ( "MonTest/index.html" );
+	    $table=$this->jquery->semantic()->htmlTable("table11",sizeof($qcms),3);
+	    $table->setHeaderValues(["Nom du QCM","Description","Date"]);
+	    $cpt=0;
+	    foreach($qcms as $elt){    
+	    $table->setRowValues($cpt,[$elt->getName(),$elt->getDescription(),$elt->getCdate()]);
+	    $cpt=$cpt+1;
+	    }
+	    echo $table->setFixed();	    	    
+	}
+	
+	public  function qcmAjoutQuestionForm($id){	   
+	    $dernierQcm = DAO::getById(Qcm::class, $id);
 	    $frm = $this->jquery->semantic()->dataElement("form", $dernierQcm);
 	    $questions = DAO::getAll(Question::class);
 	    $frm->setFields([
@@ -36,7 +49,7 @@ class UIService {
 	        'Statut du QCM',
 	        'Question'
 	    ]);
-	    $frm->fieldAsDataList('questions', JArray::modelArray ( $questions, 'getId','getCaption' ) );
+	    $frm->fieldAsDropDown('questions', JArray::modelArray ( $questions, 'getId','getCaption' ) );
 	  
 	      
 	    return $frm;	    

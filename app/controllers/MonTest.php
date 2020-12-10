@@ -27,15 +27,9 @@ class MonTest extends ControllerBase {
 	}
 	
 	public function index() {
-		$frm = $this->uiService->qcmForm ();
-
-		$frm->fieldAsSubmit ( 'submit', 'blue', 'MonTest/submit', '#response', [ 
-				'ajax' => [ 
-						'hasLoader' => 'internal'
-				]
-		] );
-		$this->jquery->renderView ( "MonTest/index.html" );
-
+	    
+	    $frm = $this->uiService->qcmListe ();
+		
 	}
 		
 	public function detailsQ($id) {
@@ -48,7 +42,21 @@ class MonTest extends ControllerBase {
 	    URequest::setValuesToObject ( $qcm );
 	    $qcm->setStatus(isset($_POST['status']));
 	    DAO::insert ( $qcm );
-	    $frm = $this->uiService->qcmAjoutQuestionForm ($qcm);
+	    $this->afficherQCM($qcm->getId());
+	}
+	
+	public function ajout(){
+	    $frm = $this->uiService->qcmForm ();
+        $frm->fieldAsSubmit ( 'submit', 'blue', 'MonTest/submit', '#response', [ 
+				'ajax' => [ 
+						'hasLoader' => 'internal'
+				]
+		] ); 
+        $this->jquery->renderView ( "MonTest/ajout.html" );
+	}
+	
+	public function afficherQCM($id){    
+	    $frm = $this->uiService->qcmAjoutQuestionForm ($id);
 	    $this->jquery->doJQuery('#form','html',"");
 	    $this->jquery->renderView("MonTest/qcm.html");
 	}
