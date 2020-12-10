@@ -37,42 +37,26 @@ class UIService {
 		] );
 		$frm->fieldAsDataList ( 'questions', JArray::modelArray ( $questions, 'getId', 'getCaption' ) );
 	}
-
 	public function qcmListe() {
-	    $qcms = DAO::getAll(Qcm::class);
-	    $this->jquery->renderView ( "MonTest/index.html" );
-	    $table=$this->jquery->semantic()->htmlTable("table11",sizeof($qcms),3);
-	    $table->setHeaderValues(["Nom du QCM","Description","Date"]);
-	    $cpt=0;
-	    foreach($qcms as $elt){    
-	    $table->setRowValues($cpt,[$elt->getName(),$elt->getDescription(),$elt->getCdate()]);
-	    $cpt=$cpt+1;
-	    }
-	    echo $table->setFixed();	    	    
+		$qcms = DAO::getAll ( Qcm::class );
+		$this->jquery->renderView ( "MonTest/index.html" );
+		$table = $this->jquery->semantic ()->htmlTable ( "table11", sizeof ( $qcms ), 3 );
+		$table->setHeaderValues ( [ 
+				"Nom du QCM",
+				"Description",
+				"Date"
+		] );
+		$cpt = 0;
+		foreach ( $qcms as $elt ) {
+			$table->setRowValues ( $cpt, [ 
+					$elt->getName (),
+					$elt->getDescription (),
+					$elt->getCdate ()
+			] );
+			$cpt = $cpt + 1;
+		}
+		echo $table->setFixed ();
 	}
-	
-	public  function qcmAjoutQuestionForm($id){	   
-	    $dernierQcm = DAO::getById(Qcm::class, $id);
-	    $frm = $this->jquery->semantic()->dataElement("form", $dernierQcm);
-	    $questions = DAO::getAll(Question::class);
-	    $frm->setFields([
-	        'name',
-	        'description',
-	        'cdate',
-	        'status',
-	        'questions'       
-	    ]);
-	    $frm->setCaptions([
-	        'Nom du QCM',
-	        'Description du QCM',
-	        'Date de creation',
-	        'Statut du QCM',
-	        'Question'
-	    ]);
-	    $frm->fieldAsDropDown('questions', JArray::modelArray ( $questions, 'getId','getCaption' ) );	  	      	     
-		return $frm;
-	}
-	
 	public function qcmForm() {
 		$qcm = new Qcm ();
 		$qcm->setStatus ( true );
