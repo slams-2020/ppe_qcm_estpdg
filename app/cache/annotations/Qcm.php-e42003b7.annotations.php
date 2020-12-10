@@ -26,12 +26,12 @@ return array(
     array('#name' => 'validator', '#type' => 'Ubiquity\\annotations\\ValidatorAnnotation', "length","constraints"=>array("max"=>42))
   ),
   'models\\Qcm::$cdate' => array(
-    array('#name' => 'column', '#type' => 'Ubiquity\\annotations\\ColumnAnnotation', "name"=>"cdate","nullable"=>true,"dbType"=>"datetime"),
+    array('#name' => 'column', '#type' => 'Ubiquity\\annotations\\ColumnAnnotation', "name"=>"cdate","nullable"=>False,"dbType"=>"datetime"),
     array('#name' => 'validator', '#type' => 'Ubiquity\\annotations\\ValidatorAnnotation', "type","dateTime"),
     array('#name' => 'transformer', '#type' => 'Ubiquity\\annotations\\TransformerAnnotation', "name"=>"datetime")
   ),
   'models\\Qcm::$status' => array(
-    array('#name' => 'column', '#type' => 'Ubiquity\\annotations\\ColumnAnnotation', "name"=>"status","nullable"=>true,"dbType"=>"varchar(10)"),
+    array('#name' => 'column', '#type' => 'Ubiquity\\annotations\\ColumnAnnotation', "name"=>"status","nullable"=>true,"dbType"=>"tinyint(1)"),
     array('#name' => 'validator', '#type' => 'Ubiquity\\annotations\\ValidatorAnnotation', "length","constraints"=>array("max"=>10))
   ),
   'models\\Qcm::$exam' => array(

@@ -24,9 +24,19 @@ class GroupController extends ControllerBase {
 	public function index() {
 		$frm = $this->GroupService->userForm ();
 		$this->jquery->renderView ( "GroupController/index.html" );
+	}
+	public function users() {
+		$frm = $this->GroupService->userForm ();
+		$this->jquery->renderView ( "GroupController/users.html" );
+		$users = DAO::getAll ( User::class );
 		$groups = DAO::getAll ( Group::class );
+		echo ("groupe<br>");
 		foreach ( $groups as $group ) {
 			echo $group->getName () . "<br>";
+		}
+		echo ("users<br>");
+		foreach ( $users as $user ) {
+			echo $user->getFirstname () . "<br>";
 		}
 	}
 	public function menu() {
@@ -38,18 +48,13 @@ class GroupController extends ControllerBase {
 		] );
 		$this->jquery->renderView ( "GroupController/menu.html" );
 	}
-	public function users() {
-		$frm = $this->GroupService->userForm ();
-		$this->jquery->renderView ( "GroupController/users.html" );
-		$users = DAO::getAll ( User::class );
-		foreach ( $users as $user ) {
-			echo $user->getName () . "<br>";
-		}
-	}
 	public function submit() {
 		$group = new Group ();
 		URequest::setValuesToObject ( $group );
 		$group->setUser ( USession::get ( "activeUser" ) );
 		DAO::insert ( $group );
+		$frm = $this->GroupService->GroupAjoutForm ( $group );
+		$this->jquery->doJQuery ( '#form', 'html', "" );
+		$this->jquery->renderView ( "GroupController/menu.html" );
 	}
 }
