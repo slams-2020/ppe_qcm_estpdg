@@ -19,10 +19,13 @@ use services\UIService;
  
 class MonTest extends ControllerBase {
 	private $uiService;
+	
+	
 	public function initialize() {
 		parent::initialize ();
 		$this->uiService = new UIService ( $this->jquery );
 	}
+	
 	public function index() {
 		$frm = $this->uiService->qcmForm ();
 
@@ -34,29 +37,23 @@ class MonTest extends ControllerBase {
 		$this->jquery->renderView ( "MonTest/index.html" );
 
 	}
-	public function affichageQuestions() {
-		$frm = $this->uiService->qcmForm ();
-		$this->jquery->getOnClick ( '#dropdown-form-typeq-0 .item', 'MonTest/detailsQ', '#response', [ 
-				'attr' => 'data-value',
-				'hasLoader' => false
-		] );
-		$this->jquery->renderView ( "MonTest/qcm.html" );
-	}
+		
 	public function detailsQ($id) {
 		$type = DAO::getById ( Question::class, 'id=' . $id );
 		echo $type->getCaption ();
 	}
+	
 	public function submit() {
-
 	    $qcm = new Qcm();
 	    URequest::setValuesToObject ( $qcm );
+	    $qcm->setStatus(isset($_POST['status']));
 	    DAO::insert ( $qcm );
+	    $frm = $this->uiService->qcmAjoutQuestionForm ($qcm);
+	    $this->jquery->doJQuery('#form','html',"");
 	    $this->jquery->renderView("MonTest/qcm.html");
-	    }
+	}
 	    
-	    public  function ajoutQuestionQcm(){
-	       // $frm = $this->uiService->qcmAjoutQuestion();
-	    }
+	
 
 	    
 		

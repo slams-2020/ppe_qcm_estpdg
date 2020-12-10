@@ -24,14 +24,14 @@ class Qcm{
 	private $description;
 
 	/**
-	 * @column("name"=>"cdate","nullable"=>true,"dbType"=>"datetime")
+	 * @column("name"=>"cdate","nullable"=>False,"dbType"=>"datetime")
 	 * @validator("type","dateTime")
 	 * @transformer("name"=>"datetime")
 	*/
 	private $cdate;
 
 	/**
-	 * @column("name"=>"status","nullable"=>true,"dbType"=>"varchar(10)")
+	 * @column("name"=>"status","nullable"=>true,"dbType"=>"tinyint(1)")
 	 * @validator("length","constraints"=>array("max"=>10))
 	*/
 	private $status;
