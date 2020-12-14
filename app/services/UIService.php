@@ -122,7 +122,7 @@ class UIService {
 		$types = DAO::getAll ( Typeq::class );
 		$q->setTypeq ( (\current ( $types ))->getId () );
 		$frm->fieldAsDropDown ( 'typeq', JArray::modelArray ( $types, 'getId' ) );
-		$frm->fieldAsInput ( 'Points', [ 
+		$frm->fieldAsInput ( 'points', [ 
 				'inputType' => 'number'
 		] );
 		$frm->setValidationParams ( [ 
@@ -179,3 +179,4 @@ class UIService {
 		return $frm;
 	}
 }
+

@@ -36,7 +36,8 @@ class QuestionController extends ControllerBase {
 		] );
 		$this->jquery->getOnClick ( '#dropdown-form-typeq-0 .item', 'QuestionController/detailsQ', '#response', [ 
 				'attr' => 'data-value',
-				'hasLoader' => false
+				'hasLoader' => false,
+				'stopPropagation' => false
 		] );
 		$this->jquery->renderView ( "QuestionController/question.html" );
 	}
