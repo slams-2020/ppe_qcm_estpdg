@@ -4,9 +4,9 @@ namespace controllers;
 
 use Ubiquity\orm\DAO;
 use Ubiquity\utils\http\URequest;
-use app\services\AnswerService;
 use models\Answer;
 use models\Question;
+use services\AnswerService;
 
 /**
  * Controller AnswerController
@@ -31,10 +31,10 @@ class AnswerController extends ControllerBase {
 		] );
 		$this->jquery->renderView ( "AnswerController/index.html" );
 	}
-	// public function detailsA($id) {
-	// $type = DAO::getById ( Question::class, 'id=' . $id );
-	// echo $type->getCaption ();
-	// }
+	public function detailsA($id) {
+		$type = DAO::getById ( Question::class, 'id=' . $id );
+		echo $type->getCaption ();
+	}
 	public function submit() {
 		$reponse = new Answer ();
 		URequest::setValuesToObject ( $reponse );

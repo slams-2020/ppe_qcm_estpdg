@@ -1,6 +1,6 @@
 <?php
 
-namespace app\services;
+namespace services;
 
 use Ajax\php\ubiquity\JsUtils;
 use Ajax\service\JArray;
@@ -35,22 +35,19 @@ class AnswerService {
 						'empty'
 				]
 		] );
-		$frm->fieldAsInput ( 'question', [ 
-				'rules' => [ 
-						'empty'
-				]
-		] );
-		$frm->fieldAsInput ( 'score', [ 
-				'rules' => [ 
-						'empty'
-				]
-		] );
 		$questions = DAO::getAll ( Question::class );
 		$r->setQuestion ( (\current ( $questions ))->getId () );
-		$frm->fieldAsDropDown ( 'question', JArray::modelArray ( $questions, 'getId', 'getCaption' ) );
+		$frm->fieldAsDropDown ( 'question', JArray::modelArray ( $questions, 'getId', 'getCaption' ), false, [ 
+				'rules' => [ 
+						'empty'
+				]
+		] );
 		$frm->fieldAsInput ( 'score', [ 
 				'inputType' => 'number',
-				'max' => '100'
+				'max' => '100',
+				'rules' => [ 
+						'empty'
+				]
 		] );
 		$frm->setValidationParams ( [ 
 				"on" => "blur",

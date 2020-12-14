@@ -109,21 +109,18 @@ class UIService {
 						'empty'
 				]
 		] );
-		$frm->fieldAsInput ( 'typeq', [ 
-				'rules' => [ 
-						'empty'
-				]
-		] );
-		$frm->fieldAsInput ( 'points', [ 
-				'rules' => [ 
-						'empty'
-				]
-		] );
 		$types = DAO::getAll ( Typeq::class );
 		$q->setTypeq ( (\current ( $types ))->getId () );
-		$frm->fieldAsDropDown ( 'typeq', JArray::modelArray ( $types, 'getId' ) );
+		$frm->fieldAsDropDown ( 'typeq', JArray::modelArray ( $types, 'getId' ), false, [ 
+				'rules' => [ 
+						'empty'
+				]
+		] );
 		$frm->fieldAsInput ( 'points', [ 
-				'inputType' => 'number'
+				'inputType' => 'number',
+				'rules' => [ 
+						'empty'
+				]
 		] );
 		$frm->setValidationParams ( [ 
 				"on" => "blur",
