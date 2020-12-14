@@ -6,7 +6,6 @@ use Ubiquity\orm\DAO;
 use Ubiquity\utils\http\URequest;
 use Ubiquity\utils\http\USession;
 use models\Group;
-use models\User;
 use services\GroupService;
 
 /**
@@ -22,22 +21,7 @@ class GroupController extends ControllerBase {
 		$this->GroupService = new GroupService ( $this->jquery );
 	}
 	public function index() {
-		$frm = $this->GroupService->userForm ();
-		$this->jquery->renderView ( "GroupController/index.html" );
-	}
-	public function users() {
-		$frm = $this->GroupService->userForm ();
-		$this->jquery->renderView ( "GroupController/users.html" );
-		$users = DAO::getAll ( User::class );
-		$groups = DAO::getAll ( Group::class );
-		echo ("groupe<br>");
-		foreach ( $groups as $group ) {
-			echo $group->getName () . "<br>";
-		}
-		echo ("users<br>");
-		foreach ( $users as $user ) {
-			echo $user->getFirstname () . "<br>";
-		}
+		$frm = $this->GroupService->GroupListe ();
 	}
 	public function menu() {
 		$frm = $this->GroupService->userForm ();
