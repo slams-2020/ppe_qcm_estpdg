@@ -2,6 +2,7 @@
 
 namespace services;
 
+use Ajax\semantic\html\base\constants\Color;
 use Ajax\php\ubiquity\JsUtils;
 use Ajax\service\JArray;
 use Ubiquity\orm\DAO;
@@ -17,30 +18,50 @@ class UIService {
 		$this->jquery = $jq;
 		$this->semantic = $jq->semantic ();
 	}
-	public function qcmAjoutQuestionForm($qcm) {
-		$dernierQcm = DAO::getById ( Qcm::class, $qcm->getId () );
-		$frm = $this->jquery->semantic ()->dataElement ( "form", $dernierQcm );
-		$questions = DAO::getAll ( Question::class );
-		$frm->setFields ( [ 
+	public function qcmAjoutQuestionForm($id) {
+		$dernierQcm = DAO::getById ( Qcm::class, $id );
+		$table = $this->jquery->semantic ()->dataElement ( "form", $dernierQcm );
+		$table->setFields ( [ 
 				'name',
 				'description',
 				'cdate',
 				'status',
-				'questions'
+		        'questions'
 		] );
-		$frm->setCaptions ( [ 
+		$table->setCaptions ( [ 
 				'Nom du QCM',
 				'Description du QCM',
 				'Date de creation',
 				'Statut du QCM',
-				'Question'
+		        'Liste des Questions du QCM'
 		] );
-		$frm->fieldAsDataList ( 'questions', JArray::modelArray ( $questions, 'getId', 'getCaption' ) );
+		//fieldAsDataList ( 'questions', JArray::modelArray ( $questions, 'getId', 'getCaption' ) );
+		return  $table;
+	}
+	
+	public  function qcmChoixQuestions(){	    
+	    $questions = DAO::getAll ( Question::class );	    
+	    $table=$this->jquery->semantic ()->htmlTable ( "tableQuestion", sizeof($questions), 3 );
+	    $table->setHeaderValues([
+	        'Intitulé de la question',
+	        'Points',
+	        'Actions'
+	    ]);
+	    $cpt = 0;
+	    foreach ( $questions as $elt ) {
+	        $table->setRowValues ( $cpt, [
+	            $elt->getCaption (),
+	            $elt->getPoints (),
+	            $bt=$this->jquery->semantic()->htmlButton("btAjout","Ajoutez")
+	        ] );
+	        $cpt = $cpt + 1;
+	   }
+	   return $table;
 	}
 	public function qcmListe() {
 		$qcms = DAO::getAll ( Qcm::class );
 		$this->jquery->renderView ( "MonTest/index.html" );
-		$table = $this->jquery->semantic ()->htmlTable ( "table11", sizeof ( $qcms ), 3 );
+		$table = $this->jquery->semantic ()->htmlTable ( "table", sizeof ( $qcms ), 3 );
 		$table->setHeaderValues ( [ 
 				"Nom du QCM",
 				"Description",
@@ -53,9 +74,12 @@ class UIService {
 					$elt->getDescription (),
 					$elt->getCdate ()
 			] );
-			$cpt = $cpt + 1;
+			$cpt = $cpt + 1;			
 		}
-		echo $table->setFixed ();
+		//$table->compile($this->jquery);
+		//$table->tableSort();
+		
+		return  $table;
 	}
 	public function qcmForm() {
 		$qcm = new Qcm ();
@@ -70,7 +94,8 @@ class UIService {
 		$frm->setCaptions ( [ 
 				'Nom du QCM',
 				'Description du QCM',
-				'Actif'
+				'Actif',
+		        'Valider'
 		] );
 
 		$frm->fieldAsInput ( 'name', [ 

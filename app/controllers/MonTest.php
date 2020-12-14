@@ -26,10 +26,9 @@ class MonTest extends ControllerBase {
 		$this->uiService = new UIService ( $this->jquery );
 	}
 	
-	public function index() {
-	    
+	public function index() {	    
 	    $frm = $this->uiService->qcmListe ();
-		
+	    echo $frm;		
 	}
 		
 	public function detailsQ($id) {
@@ -57,8 +56,10 @@ class MonTest extends ControllerBase {
 	
 	public function afficherQCM($id){    
 	    $frm = $this->uiService->qcmAjoutQuestionForm ($id);
+	    $frm = $this->uiService->qcmChoixQuestions();
 	    $this->jquery->doJQuery('#form','html',"");
 	    $this->jquery->renderView("MonTest/qcm.html");
+	    
 	}
 	    
 	
