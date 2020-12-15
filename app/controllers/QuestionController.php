@@ -29,12 +29,12 @@ class QuestionController extends ControllerBase {
 	}
 	public function question() {
 		$frm = $this->UIService->questionForm ();
-		$frm->fieldAsSubmit ( 'submit', 'blue', 'QuestionController/submit', '', [ 
-				'ajax' => [ 
+		$frm->fieldAsSubmit ( 'submit', 'blue', 'QuestionController/submit', '', [
+				'ajax' => [
 						'hasLoader' => 'internal'
 				]
 		] );
-		$this->jquery->getOnClick ( '#dropdown-form-typeq-0 .item', 'QuestionController/detailsQ', '#response', [ 
+		$this->jquery->getOnClick ( '#dropdown-form-typeq-0 .item', 'QuestionController/detailsQ', '#response', [
 				'attr' => 'data-value',
 				'hasLoader' => false,
 				'stopPropagation' => false
@@ -43,6 +43,11 @@ class QuestionController extends ControllerBase {
 	}
 	public function detailsQ($id) {
 		$type = DAO::getById ( Typeq::class, 'id=' . $id );
-		echo $type->getCaption ();
+		if($type->getId()==1){
+		    echo "Coucou";
+        }
+		else{
+		    echo $type->getCaption();
+        }
 	}
 }
