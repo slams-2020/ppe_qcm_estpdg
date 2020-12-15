@@ -27,8 +27,10 @@ class MonTest extends ControllerBase {
 	}
 	
 	public function index() {	    
-	    $frm = $this->uiService->qcmListe ();
-	    echo $frm;		
+	    $frm = $this->uiService->qcmListeProf ();
+	    $this->jquery->getOnClick('._delete', 'MonTest/suppQcm','#main-container',['attr'=>'data-ajax']);
+	    $this->jquery->getOnClick('._edit', 'MonTest/afficherQCM','#main-container',['attr'=>'data-ajax']);
+	    $this->jquery->renderView ( "MonTest/index.html" );
 	}
 		
 	public function detailsQ($id) {
@@ -56,14 +58,19 @@ class MonTest extends ControllerBase {
 	
 	public function afficherQCM($id){    
 	    $frm = $this->uiService->qcmAjoutQuestionForm ($id);
-	    $frm = $this->uiService->qcmChoixQuestions();
-	    $this->jquery->doJQuery('#form','html',"");
+	    $frm2 = $this->uiService->qcmChoixQuestions();
+	   // $this->jquery->doJQuery('#form','html',"");
 	    $this->jquery->renderView("MonTest/qcm.html");
 	    
 	}
 	    
-	
+	public function suppQcm($id){
+	    DAO::delete(Qcm::class, $id);
+	    $frm = $this->uiService->qcmListeProf();
+	    $this->jquery->renderView("MonTest/index.html");
+	}
 
+	
 	    
 		
 	}
