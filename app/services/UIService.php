@@ -20,8 +20,8 @@ class UIService {
 		$this->semantic = $jq->semantic ();
 	}
 	public function qcmAjoutQuestionForm($id) {
-		$dernierQcm = DAO::getById ( Qcm::class, $id );
-		$table = $this->jquery->semantic ()->dataElement ( "form", $dernierQcm );
+		$dernierQcm = DAO::getById ( Qcm::class, $id ,['questions']);
+		$table = $this->jquery->semantic ()->dataElement ( "formQ", $dernierQcm );
 		$table->setFields ( [ 
 				'name',
 				'description',
@@ -36,6 +36,7 @@ class UIService {
 				'Statut du QCM',
 		        'Liste des Questions du QCM'
 		] );
+	
 		//fieldAsDataList ( 'questions', JArray::modelArray ( $questions, 'getId', 'getCaption' ) );
 		return  $table;
 	}
@@ -54,17 +55,8 @@ class UIService {
 	    );
 	    $table->setIdentifierFunction('getId');
 	    $table->addDisplayButton(false);
-	    $table->addEditButton(False);
-// 	    $cpt = 0;
-// 	    foreach ( $questions as $elt ) {
-// 	        $table->setRowValues ( $cpt, [
-// 	            $elt->getCaption (),
-// 	            $elt->getPoints (),
-// 	            $bt=$this->jquery->semantic()->htmlButton("btAjout","Ajoutez","blue")
-// 	        ] );
-// 	        $cpt = $cpt + 1;
-// 	   }
-	   return $table;
+	    $table->addEditButton(false);
+	    return $table;
 	}
 	
 	

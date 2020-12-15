@@ -59,9 +59,8 @@ class MonTest extends ControllerBase {
 	public function afficherQCM($id){    
 	    $frm = $this->uiService->qcmAjoutQuestionForm ($id);
 	    $frm2 = $this->uiService->qcmChoixQuestions();
-	   // $this->jquery->doJQuery('#form','html',"");
-	    $this->jquery->renderView("MonTest/qcm.html");
-	    
+	    $this->jquery->doJQuery('#form','html',"");
+	    $this->jquery->renderView("MonTest/qcm.html");	    
 	}
 	    
 	public function suppQcm($id){

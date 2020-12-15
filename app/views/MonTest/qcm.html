@@ -1,10 +1,12 @@
 <!-- Ajout des questions du QCM nouvellement créer de MonTest.php -->
-<div class="ui container">
-{{ q['form'] | raw }}
-<div id="response"></div>
-</div>
-<div class="ui container">
-{{ q['tableQuestion'] | raw }}
-</div>
-
+<div id="affich container">
+	<div class="ui container">
+		{{ q['formQ'] | raw }}
+	<div id="response">
+	</div>
+	</div>
+	<div class="ui container">
+		{{ q['tableQuestions'] | raw }}
+	</div>
 {{ script_foot | raw }}
+</div>
