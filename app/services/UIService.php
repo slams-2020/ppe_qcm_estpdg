@@ -10,6 +10,7 @@ use models\Qcm;
 use models\Question;
 use models\Typeq;
 use models\User;
+use Ajax\semantic\html\elements\HtmlButton;
 
 class UIService {
 	protected $jquery;
@@ -41,45 +42,45 @@ class UIService {
 	
 	public  function qcmChoixQuestions(){	    
 	    $questions = DAO::getAll ( Question::class );	    
-	    $table=$this->jquery->semantic ()->htmlTable ( "tableQuestion", sizeof($questions), 3 );
-	    $table->setHeaderValues([
-	        'Intitulé de la question',
-	        'Points',
-	        'Actions'
+	    $table=$this->jquery->semantic ()->dataTable("tableQuestions", Question::class, $questions);
+	    $table->setFields([
+	        'caption',
+	        'points'	        
 	    ]);
-	    $cpt = 0;
-	    foreach ( $questions as $elt ) {
-	        $table->setRowValues ( $cpt, [
-	            $elt->getCaption (),
-	            $elt->getPoints (),
-	            $bt=$this->jquery->semantic()->htmlButton("btAjout","Ajoutez")
-	        ] );
-	        $cpt = $cpt + 1;
-	   }
+	    $table->setCaptions([
+	        "Intitulé de la Question",
+	        "Points de la question"
+	        ]
+	    );
+	    $table->setIdentifierFunction('getId');
+	    $table->addDisplayButton(false);
+	    $table->addEditButton(False);
+// 	    $cpt = 0;
+// 	    foreach ( $questions as $elt ) {
+// 	        $table->setRowValues ( $cpt, [
+// 	            $elt->getCaption (),
+// 	            $elt->getPoints (),
+// 	            $bt=$this->jquery->semantic()->htmlButton("btAjout","Ajoutez","blue")
+// 	        ] );
+// 	        $cpt = $cpt + 1;
+// 	   }
 	   return $table;
 	}
-	public function qcmListe() {
-		$qcms = DAO::getAll ( Qcm::class );
-		$this->jquery->renderView ( "MonTest/index.html" );
-		$table = $this->jquery->semantic ()->htmlTable ( "table", sizeof ( $qcms ), 3 );
-		$table->setHeaderValues ( [ 
-				"Nom du QCM",
-				"Description",
-				"Date"
-		] );
-		$cpt = 0;
-		foreach ( $qcms as $elt ) {
-			$table->setRowValues ( $cpt, [ 
-					$elt->getName (),
-					$elt->getDescription (),
-					$elt->getCdate ()
-			] );
-			$cpt = $cpt + 1;			
-		}
-		//$table->compile($this->jquery);
-		//$table->tableSort();
-		
-		return  $table;
+	
+	
+	public function qcmListeProf() {
+	    $qcms = DAO::getAll ( Qcm::class );
+	    $table = $this->jquery->semantic ()->dataTable( "table", Qcm::class,$qcms );
+	    $table->setFields(['name','description','cDate']);
+	    $table->setCaptions( [
+	        "Nom du QCM",
+	        "Description",
+	        "Date"
+	    ] );
+	    $table->setIdentifierFunction('getId');
+	    $table->addDeleteButton(false);
+	    $table->addEditButton(false);
+	    return  $table;
 	}
 	public function qcmForm() {
 		$qcm = new Qcm ();
