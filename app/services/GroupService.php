@@ -40,22 +40,17 @@ class GroupService {
 		] );
 		return $frm;
 	}
-	public function GroupListe() {
-		$groups = DAO::getAll ( Group::class );
-		$this->jquery->renderView ( "GroupController/index.html" );
-		$table = $this->jquery->semantic ()->htmlTable ( "table11", sizeof ( $groups ), 2 );
-		$table->setHeaderValues ( [ 
-				"Nom du Groupe",
-				"Description"
-		] );
-		$cpt = 0;
-		foreach ( $groups as $elt ) {
-			$table->setRowValues ( $cpt, [ 
-					$elt->getName (),
-					$elt->getDescription ()
-			] );
-			$cpt = $cpt + 1;
-		}
-		echo $table->setFixed ();
-	}
+    public function GroupListe() {
+        $groups = DAO::getAll ( Group::class );
+        $table = $this->jquery->semantic ()->dataTable( "table", Group::class,$groups );
+        $table->setFields(['name','description']);
+        $table->setCaptions( [
+            "Nom du Groupe",
+            "Description"
+        ] );
+        $table->setIdentifierFunction('getId');
+        $table->addDeleteButton(false);
+        $table->addEditButton(false);
+        return  $table;
+    }
 }

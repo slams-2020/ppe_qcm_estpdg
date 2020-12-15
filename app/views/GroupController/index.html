@@ -1,12 +1,14 @@
+<div id="main-container">
 <div class="ui container">
-{{ q['form'] | raw }}
+	<a href="GroupController/menu">
+	<button class="ui active button">
+		<i class="add icon"></i>
+		Ajouter un groupe
+	</button>
+	</a>
+{{ q['table'] | raw }}
 <div id="response"></div>
 </div>
-<a href="GroupController/menu">
-	<button class="ui active button">
-  			<i class="add icon"></i>
-  		Ajouter un groupe
-	</button>
-</a>
 <br>
 {{ script_foot | raw }}
+</div>
