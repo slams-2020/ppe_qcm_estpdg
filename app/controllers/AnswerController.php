@@ -24,7 +24,7 @@ class AnswerController extends ControllerBase {
 						'hasLoader' => 'internal'
 				]
 		] );
-		$this->jquery->getOnClick ( '#dropdown-form-typeq-0 .item', 'AnswerController/detailsA', '#response', [ 
+		$this->jquery->getOnClick ( '#dropdown-form-question-0 .item', 'AnswerController/detailsA', '#response', [
 				'attr' => 'data-value',
 				'hasLoader' => false,
 				'stopPropagation' => false
