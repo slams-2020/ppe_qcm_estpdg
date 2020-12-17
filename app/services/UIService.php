@@ -36,8 +36,6 @@ class UIService {
 				'Statut du QCM',
 		        'Liste des Questions du QCM'
 		] );
-	
-		//fieldAsDataList ( 'questions', JArray::modelArray ( $questions, 'getId', 'getCaption' ) );
 		return  $table;
 	}
 	
@@ -54,7 +52,9 @@ class UIService {
 	        ]
 	    );
 	    $table->setIdentifierFunction('getId');
-	    $table->addDisplayButton(false);
+	    $table->addDisplayButton(false,[],function(HtmlButton $bt){
+	        $bt->asIcon(' green plus icon');
+	    });
 	    $table->addEditButton(false);
 	    return $table;
 	}
