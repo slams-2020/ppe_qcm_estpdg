@@ -2,6 +2,7 @@
 
 namespace controllers;
 
+use models\Answer;
 use services\AnswerService;
 use Ubiquity\orm\DAO;
 use Ubiquity\utils\http\URequest;
@@ -11,6 +12,8 @@ use services\UIService;
 
 /**
  * Controller Question
+ *
+ * @property \Ajax\php\ubiquity\JsUtils $jquery
  */
 class QuestionController extends ControllerBase
 {
@@ -36,6 +39,11 @@ class QuestionController extends ControllerBase
         $typeQ = DAO::getById(Typeq::class, URequest::post('typeq'));
         $question->setTypeq($typeQ);
         DAO::insert($question);
+        $reponse = new Answer ();
+        URequest::setValuesToObject($reponse);
+        $typeA = DAO::getById(Question::class, URequest::post('question'));
+        $reponse->setQuestion($question);
+        DAO::insert($reponse);
     }
     
     public function question()
@@ -75,7 +83,7 @@ class QuestionController extends ControllerBase
             $this->jquery->renderView("AnswerController/index.html");
         } else {
             if ($type->getId() == 2) {
-                echo "Cocu";
+                echo "Coucou";
             }
         }
     }
