@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<div id="main-container">
+    <div class="ui container">
+        {{ q['form'] | raw }}
+        {{ q['tableUIG'] | raw }}
+        {{ q['tableU'] | raw }}
+        <div id="response"></div>
+    </div>
+    <br>
+    {{ script_foot | raw }}
+</div>

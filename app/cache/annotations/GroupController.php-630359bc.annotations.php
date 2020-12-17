@@ -3,6 +3,7 @@
 return array(
   '#namespace' => 'controllers',
   '#uses' => array (
+  'User' => 'models\\User',
   'DAO' => 'Ubiquity\\orm\\DAO',
   'URequest' => 'Ubiquity\\utils\\http\\URequest',
   'USession' => 'Ubiquity\\utils\\http\\USession',
