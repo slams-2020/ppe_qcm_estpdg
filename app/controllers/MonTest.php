@@ -32,12 +32,7 @@ class MonTest extends ControllerBase {
 	    $this->jquery->getOnClick('._edit', 'MonTest/afficherQCM','#main-container',['attr'=>'data-ajax']);
 	    $this->jquery->renderView ( "MonTest/index.html" );
 	}
-		
-	public function detailsQ($id) {
-		$type = DAO::getById ( Question::class, 'id=' . $id );
-		echo $type->getCaption ();
-	}
-	
+			
 	public function submit() {
 	    $qcm = new Qcm();
 	    URequest::setValuesToObject ( $qcm );
@@ -60,19 +55,20 @@ class MonTest extends ControllerBase {
 	    $frm = $this->uiService->qcmAjoutQuestionForm ($id);
 	    $frm2 = $this->uiService->qcmChoixQuestions();
 	    $this->jquery->doJQuery('#form','html',"");
-	    $this->jquery->renderView("MonTest/qcm.html");	    
+	    $this->jquery->getOnClick('._display', 'MonTest/addQuestToQcm', '#affich container', ['attr'=>'data-ajax']);
+	    $this->jquery->renderView("MonTest/qcm.html");
 	}
 	    
+	public function addQuestToQcm($id, $qcm){
+	    
+	    DAO::update($qcm);
+	}
 	public function suppQcm($id){
 	    DAO::delete(Qcm::class, $id);
-	    $frm = $this->uiService->qcmListeProf();
-	    $this->jquery->renderView("MonTest/index.html");
-	}
-
-	
-	    
+	    $this->index();
+	}	    
 		
-	}
+}
 
 
 
