@@ -1,5 +1,4 @@
 <?php
-error_reporting ( E_ALL );
 if (! defined ( 'DS' )) {
 	define ( 'DS', DIRECTORY_SEPARATOR );
 	define ( 'ROOT', __DIR__ . \DS .'..'.\DS. 'app' . \DS );
@@ -14,5 +13,6 @@ if(class_exists("\\Monolog\\Logger")){
 	$config['logger']=function () use($sConfig){return new \Ubiquity\log\libraries\UMonolog($sConfig['sessionName'],\Monolog\Logger::INFO);};
 	\Ubiquity\log\Logger::init($config);
 }
+\Ubiquity\debug\Debugger::start($config);
 require ROOT . 'config/services.php';
 \Ubiquity\controllers\Startup::run ( $config );

@@ -22,22 +22,24 @@ class AnswerService
     public function reponseForm()
     {
         $r = new Answer ();
-        $frm = $this->jquery->semantic()->dataForm('form', $r);
+        $frm = $this->jquery->semantic()->dataForm('answerForm', $r);
         $frm->getHtmlComponent()->setTagName('div');
         $frm->setFields([
             'caption',
-            'score',
-            'submit'
+            'score'
         ]);
         $frm->setCaptions([
             'Intitulé de la réponse',
             'Valeur de la réponse (en %)',
-            'Valider'
+            'Ajouter la réponse'
         ]);
         $frm->fieldAsInput('caption', [
             'rules' => [
                 'empty'
             ]
+        ]);
+        $frm->setPropertyValues('name', [
+            'caption' => 'answerCaption'
         ]);
         $questions = DAO::getAll(Question::class);
         $r->setQuestion((\current($questions))->getId());

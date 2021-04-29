@@ -1,48 +1,48 @@
 <?php
 namespace models;
 /**
- * @table('typeq')
-*/
+ * @table("name"=>"typeq")
+ */
 class Typeq{
 	/**
-	 * @id
-	 * @column("name"=>"id","nullable"=>false,"dbType"=>"int(11)")
-	 * @validator("id","constraints"=>array("autoinc"=>true))
-	*/
+	 * @id()
+	 * @column("name"=>"id","dbType"=>"int(11)")
+	 * @validator("type"=>"id","constraints"=>["autoinc"=>true])
+	 */
 	private $id;
 
 	/**
-	 * @column("name"=>"caption","nullable"=>false,"dbType"=>"varchar(100)")
-	 * @validator("length","constraints"=>array("max"=>100,"notNull"=>true))
-	*/
+	 * @column("name"=>"caption","dbType"=>"varchar(100)")
+	 * @validator("type"=>"length","constraints"=>["max"=>100,"notNull"=>true])
+	 */
 	private $caption;
 
 	/**
 	 * @oneToMany("mappedBy"=>"typeq","className"=>"models\\Question")
-	*/
+	 */
 	private $questions;
 
-	 public function getId(){
+	public function getId(){
 		return $this->id;
 	}
 
-	 public function setId($id){
+	public function setId($id){
 		$this->id=$id;
 	}
 
-	 public function getCaption(){
+	public function getCaption(){
 		return $this->caption;
 	}
 
-	 public function setCaption($caption){
+	public function setCaption($caption){
 		$this->caption=$caption;
 	}
 
-	 public function getQuestions(){
+	public function getQuestions(){
 		return $this->questions;
 	}
 
-	 public function setQuestions($questions){
+	public function setQuestions($questions){
 		$this->questions=$questions;
 	}
 

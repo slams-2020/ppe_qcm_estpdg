@@ -1,2 +1,2 @@
 <?php
-return array("host"=>"127.0.0.1","port"=>8090,"sessionName"=>"s5fc4a2ec7c61e");
+return array("host"=>"127.0.0.1","port"=>8090,"sessionName"=>"s608817e34cda7");

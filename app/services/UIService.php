@@ -128,12 +128,15 @@ class UIService
             'caption',
             'typeq',
             'points',
-            'frm'
+            'frm',
+            'submit'
         ]);
         $frm->setCaptions([
             'Intitulé de la question',
             'Type de question',
-            'Points de la question'
+            'Points de la question',
+            '',
+            'Valider'
         ]);
         $frm->fieldAsInput('caption', [
             'rules' => [

@@ -1,5 +1,4 @@
 <?php
-
 namespace controllers;
 
 use models\Answer;
@@ -17,74 +16,73 @@ use services\UIService;
  */
 class QuestionController extends ControllerBase
 {
+
     private $UIService;
+
     private $AnswerService;
-    
+
     public function initialize()
     {
         parent::initialize();
-        $this->UIService = new UIService ($this->jquery);
-        $this->AnswerService = new AnswerService ($this->jquery);
+        $this->UIService = new UIService($this->jquery);
+        $this->AnswerService = new AnswerService($this->jquery);
     }
-    
+
     public function index()
     {
         $this->loadView("QuestionController/index.html");
     }
-    
+
     public function submit()
     {
-        $question = new Question ();
+        $question = new Question();
         URequest::setValuesToObject($question);
         $typeQ = DAO::getById(Typeq::class, URequest::post('typeq'));
         $question->setTypeq($typeQ);
         DAO::insert($question);
-        $reponse = new Answer ();
-        URequest::setValuesToObject($reponse);
-        $typeA = DAO::getById(Question::class, URequest::post('question'));
-        $reponse->setQuestion($question);
-        DAO::insert($reponse);
+        if (URequest::has('answerCaption')) {
+            $reponse = new Answer();
+            $reponse->setCaption(URequest::post('answerCaption'));
+            $reponse->setScore(URequest::post('score'));
+            $reponse->setQuestion($question);
+            if(DAO::insert($reponse)){
+                echo $reponse;   
+            }
+            else{
+                echo 'Pas de réponse';
+            }
+        }
+        
     }
-    
+
     public function question()
     {
         $frm = $this->UIService->questionForm();
-        $frm->fieldAsSubmit('submit', 'blue', 'QuestionController/submit', '', [
+        $frm->fieldAsSubmit('submit', 'blue', 'QuestionController/submit', '#responseElement', [
             'ajax' => [
                 'hasLoader' => 'internal'
             ]
         ]);
-        $this->jquery->getOnClick('#dropdown-form-typeq-0 .item',
-            'QuestionController/detailsQ', '#response', [
-                'attr'            => 'data-value',
-                'hasLoader'       => false,
-                'stopPropagation' => false
-            ]);
+        $this->jquery->getOnClick('#dropdown-form-typeq-0 .item', 'QuestionController/detailsQ', '#response', [
+            'attr' => 'data-value',
+            'hasLoader' => false,
+            'stopPropagation' => false
+        ]);
         $this->jquery->renderView("QuestionController/question.html");
+
     }
-    
+
     public function detailsQ($id)
     {
         $type = DAO::getById(Typeq::class, 'id=' . $id);
         if ($type->getId() == 1) {
             $frm = $this->AnswerService->reponseForm();
-            $frm->fieldAsSubmit('submit', 'blue', 'AnswerController/submit', '',
-                [
-                    'ajax' => [
-                        'hasLoader' => 'internal'
-                    ]
-                ]);
-            $this->jquery->getOnClick('#dropdown-form-question-0 .item',
-                'AnswerController/detailsA', '#response', [
-                    'attr'            => 'data-value',
-                    'hasLoader'       => false,
-                    'stopPropagation' => false
-                ]);
+            $this->jquery->getOnClick('#dropdown-form-question-0 .item', 'AnswerController/detailsA', '#response', [
+                'attr' => 'data-value',
+                'hasLoader' => false,
+                'stopPropagation' => false
+            ]);
             $this->jquery->renderView("AnswerController/index.html");
-        } else {
-            if ($type->getId() == 2) {
-                echo "Coucou";
-            }
         }
     }
 }
