@@ -54,7 +54,8 @@ class UIService
             ->dataTable("tableQuestions", Question::class, $questions);
         $table->setFields([
             'caption',
-            'points'
+            'points',
+            'buttons'
         ]);
         $table->setCaptions([
                 "Intitulé de la Question",
@@ -62,8 +63,12 @@ class UIService
             ]
         );
         $table->setIdentifierFunction('getId');
-        $table->addDisplayButton(false);
+
         $table->addEditButton(false);
+        $table->fieldAsButton('buttons','green enabled',['jsCallback'=>function($xx){
+            $xx->addIcon("plus");
+            $xx->setEnabled();
+        }]);
         return $table;
     }
     
