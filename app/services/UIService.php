@@ -5,6 +5,7 @@ namespace services;
 use Ajax\semantic\html\base\constants\Color;
 use Ajax\php\ubiquity\JsUtils;
 use Ajax\semantic\html\elements\HtmlSegment;
+use Ajax\semantic\widgets\dataform\DataForm;
 use Ajax\service\JArray;
 use Ubiquity\orm\DAO;
 use models\Qcm;
@@ -125,7 +126,7 @@ class UIService
         return $frm;
     }
     
-    public function questionForm()
+    public function questionForm():DataForm
     {
         $q = new Question ();
         $frm = $this->jquery->semantic()->dataForm('form', $q);
@@ -134,6 +135,7 @@ class UIService
             'typeq',
             'points',
             'frm',
+            'addReponse',
             'submit'
         ]);
         $frm->setCaptions([
@@ -141,6 +143,7 @@ class UIService
             'Type de question',
             'Points de la question',
             '',
+            'Ajouter une question',
             'Valider'
         ]);
         $frm->fieldAsInput('caption', [

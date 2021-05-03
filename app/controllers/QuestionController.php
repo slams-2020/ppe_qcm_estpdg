@@ -1,4 +1,5 @@
 <?php
+
 namespace controllers;
 
 use models\Answer;
@@ -17,7 +18,7 @@ use services\UIService;
 class QuestionController extends ControllerBase
 {
 
-    private $UIService;
+    private UIService $UIService;
 
     private $AnswerService;
 
@@ -45,15 +46,18 @@ class QuestionController extends ControllerBase
             $reponse->setCaption(URequest::post('answerCaption'));
             $reponse->setScore(URequest::post('score'));
             $reponse->setQuestion($question);
-            if(DAO::insert($reponse)){
-                echo $reponse;   
-            }
-            else{
+            if (DAO::insert($reponse)) {
+                echo $reponse;
+            } else {
                 echo 'Pas de réponse';
             }
         }
-        
     }
+
+    public function addReponse()
+    {
+        $this->loadView('QuestionController/index.html');
+}
 
     public function question()
     {
@@ -63,11 +67,13 @@ class QuestionController extends ControllerBase
                 'hasLoader' => 'internal'
             ]
         ]);
+        $frm->fieldAsButton('addReponse','green',['value'=>'Ajouter une réponse','tagName'=>'div']);
         $this->jquery->getOnClick('#dropdown-form-typeq-0 .item', 'QuestionController/detailsQ', '#response', [
             'attr' => 'data-value',
             'hasLoader' => false,
             'stopPropagation' => false
         ]);
+        $this->jquery->click('#form-addReponse-0', 'let frm=$("#answerForm").clone();$("#response").append(frm);');
         $this->jquery->renderView("QuestionController/question.html");
 
     }

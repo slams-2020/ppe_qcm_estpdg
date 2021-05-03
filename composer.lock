@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7c1e06e323acaf69e901abf5ac32b7e7",
+    "content-hash": "b61ca190c7cb0546ea233496177408e1",
     "packages": [
         {
             "name": "frameworks/jquery",
@@ -234,16 +234,16 @@
         },
         {
             "name": "phpmv/ubiquity",
-            "version": "2.4.4",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpMv/ubiquity.git",
-                "reference": "e3508c8c3948a3b3ca36ba7e064140bf29e1325b"
+                "reference": "1c571d6d1d333c20b6c0273e4739466a874170de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpMv/ubiquity/zipball/e3508c8c3948a3b3ca36ba7e064140bf29e1325b",
-                "reference": "e3508c8c3948a3b3ca36ba7e064140bf29e1325b",
+                "url": "https://api.github.com/repos/phpMv/ubiquity/zipball/1c571d6d1d333c20b6c0273e4739466a874170de",
+                "reference": "1c571d6d1d333c20b6c0273e4739466a874170de",
                 "shasum": ""
             },
             "require": {
@@ -255,6 +255,7 @@
                 "phpmv/ubiquity-dev": "^0.1",
                 "phpmv/ubiquity-devtools": "dev-master"
             },
+            "default-branch": true,
             "type": "framework",
             "extra": {
                 "branch-alias": {
@@ -286,9 +287,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpMv/ubiquity/issues",
-                "source": "https://github.com/phpMv/ubiquity/tree/2.4.4"
+                "source": "https://github.com/phpMv/ubiquity/tree/master"
             },
-            "time": "2021-04-25T01:08:34+00:00"
+            "time": "2021-05-01T15:18:12+00:00"
         },
         {
             "name": "phpmv/ubiquity-annotations",
@@ -347,22 +348,23 @@
         },
         {
             "name": "phpmv/ubiquity-debug",
-            "version": "0.0.2",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpMv/ubiquity-debug.git",
-                "reference": "db47eed8b1d7d2cb6262502f579d970f383ab199"
+                "reference": "a3d946370f050c3c80dfd568ba6d50e37e18186b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpMv/ubiquity-debug/zipball/db47eed8b1d7d2cb6262502f579d970f383ab199",
-                "reference": "db47eed8b1d7d2cb6262502f579d970f383ab199",
+                "url": "https://api.github.com/repos/phpMv/ubiquity-debug/zipball/a3d946370f050c3c80dfd568ba6d50e37e18186b",
+                "reference": "a3d946370f050c3c80dfd568ba6d50e37e18186b",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.4",
                 "prismjs/prism": "^1.23"
             },
+            "default-branch": true,
             "type": "extension",
             "extra": {
                 "branch-alias": {
@@ -396,9 +398,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpMv/ubiquity-debug/issues",
-                "source": "https://github.com/phpMv/ubiquity-debug/tree/0.0.2"
+                "source": "https://github.com/phpMv/ubiquity-debug/tree/0.0.3"
             },
-            "time": "2021-04-26T00:17:13+00:00"
+            "time": "2021-04-30T01:45:31+00:00"
         },
         {
             "name": "phpmv/ubiquity-mailer",
@@ -1038,6 +1040,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "phpmv/ubiquity": 20,
+        "phpmv/ubiquity-debug": 20,
         "phpmv/ubiquity-annotations": 20
     },
     "prefer-stable": false,
