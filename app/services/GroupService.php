@@ -54,7 +54,7 @@ class GroupService {
         $table->addEditButton(false);
         return  $table;
     }
-    public function UserListe($users) {
+    public function UserListeInGroup($users) {
         $table = $this->jquery->semantic ()->dataTable( "tableU", User::class,$users );
         $table->setFields(['lastname','firstname']);
         $table->setCaptions( [
@@ -62,17 +62,22 @@ class GroupService {
             "Prenom"
         ] );
         $table->setIdentifierFunction('getId');
+        $table->addDeleteButton(false);
         return  $table;
     }
-    public function UserListeInGroup() {
+    public function UserListe() {
         $users = DAO::getAll ( User::class );
         $table = $this->jquery->semantic ()->dataTable( "tableUIG", User::class,$users );
-        $table->setFields(['lastname','firstname']);
+        $table->setEdition(true);
+        $table->setFields(['lastname','firstname','bt']);
         $table->setCaptions( [
             "Nom",
             "Prenom"
         ] );
         $table->setIdentifierFunction('getId');
+        $table->fieldAsButton('bt',"blue",['jsCallback' => function($bt){
+            $bt->asIcon('plus');
+        }]);
         return  $table;
     }
 }

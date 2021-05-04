@@ -30,7 +30,7 @@ class GroupController extends ControllerBase {
         $this->jquery->renderView ( "GroupController/index.html" );
 	}
     public function edit() {
-        $frm = $this->GroupService->UserListeInGroup ();
+        $frm = $this->GroupService->UserListe ();
         $this->jquery->renderView ( "GroupController/edit.html" );
     }
 	public function menu() {
@@ -61,14 +61,14 @@ class GroupController extends ControllerBase {
     public function afficherUtilisateur($id){
         $gr=DAO::getById( Group::class, $id ,['users']);
         $users = $gr->getUsers();
-        $frm = $this->GroupService->UserListe ($users);
+        $frm = $this->GroupService->UserListeInGroup ($users);
         // $this->jquery->doJQuery('#form','html',"");
         $this->edit();
     }
     public function afficherUtilisateurInGroup($id){
 	    $gr=DAO::getById( Group::class, $id ,['users']);
         $users = $gr->getUsers();
-        $frm = $this->GroupService->UserListe ($users);
+        $frm = $this->GroupService->UserListeInGroup ($users);
         // $this->jquery->doJQuery('#form','html',"");
         $this->edit();
     }
@@ -76,5 +76,11 @@ class GroupController extends ControllerBase {
         DAO::delete(Group::class, $id);
         $frm = $this->GroupService->GroupListe();
         $this->index();
+    }
+
+    public function ajouteUtilisateur($id,User $user ){
+        $group=DAO::getById( Group::class, $id ,['users']);
+        $group->addUser($user);
+        $this->edit();
     }
 }
