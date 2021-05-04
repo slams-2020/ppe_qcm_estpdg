@@ -1,9 +1,20 @@
 <div id="main-container">
-    <div class="ui container">
-        {{ q['form'] | raw }}
-        {{ q['tableUIG'] | raw }}
-        {{ q['tableU'] | raw }}
+    <div class="ui container usersUpdate">
+
+        <div class="ui message">
+            <div class="header">
+                Utilisateurs non inclus dans le groupe
+            </div>
+        </div>
+        {{ q['tablenotIn'] | raw }}
+        <div class="ui message">
+            <div class="header">
+                Utilisateurs inclus dans le groupe
+            </div>
+        </div>
+        {{ q['tableinGroup'] | raw }}
         <div id="response"></div>
+
     </div>
     <br>
     {{ script_foot | raw }}
