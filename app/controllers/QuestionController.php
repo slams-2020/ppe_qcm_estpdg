@@ -20,7 +20,7 @@ class QuestionController extends ControllerBase
 
     private UIService $UIService;
 
-    private $AnswerService;
+    private AnswerService $AnswerService;
 
     public function initialize()
     {
@@ -42,14 +42,17 @@ class QuestionController extends ControllerBase
         $question->setTypeq($typeQ);
         DAO::insert($question);
         if (URequest::has('answerCaption')) {
-            $reponse = new Answer();
-            $reponse->setCaption(URequest::post('answerCaption'));
-            $reponse->setScore(URequest::post('score'));
-            $reponse->setQuestion($question);
-            if (DAO::insert($reponse)) {
-                echo $reponse;
-            } else {
-                echo 'Pas de réponse';
+            foreach($_POST['answerCaption'] as $index=>$answer) {
+                $reponse = new Answer();
+                $reponse->setCaption($_POST['answerCaption'][$index]);
+                $reponse->setScore($_POST['score'][$index]??0);
+                $reponse->setQuestion($question);
+                if(DAO::insert($reponse)){
+                    echo $reponse;
+                }
+                else{
+                    echo 'Pas de réponse.';
+                }
             }
         }
     }
@@ -83,12 +86,8 @@ class QuestionController extends ControllerBase
         $type = DAO::getById(Typeq::class, 'id=' . $id);
         if ($type->getId() == 1) {
             $frm = $this->AnswerService->reponseForm();
-            $this->jquery->getOnClick('#dropdown-form-question-0 .item', 'AnswerController/detailsA', '#response', [
-                'attr' => 'data-value',
-                'hasLoader' => false,
-                'stopPropagation' => false
-            ]);
             $this->jquery->renderView("AnswerController/index.html");
         }
+
     }
 }

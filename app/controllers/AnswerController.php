@@ -38,13 +38,7 @@ class AnswerController extends ControllerBase
             ]);
         $this->jquery->renderView("AnswerController/index.html");
     }
-    
-    public function detailsA($id)
-    {
-        $type = DAO::getById(Question::class, 'id=' . $id);
-        echo $type->getCaption();
-    }
-    
+
     public function submit()
     {
         $question = new Question ();
