@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{{ script_foot | raw }}
-</body>
-</html>
+<div id="main-container">
+    <div class="ui container">
+        <a href="EvalController/menu">
+            <button class="ui active button">
+                <i class="add icon"></i>
+                Créer une Evaluation
+            </button>
+        </a>
+        {{ q['tableE'] | raw }}
+        <div id="response"></div>
+    </div>
+    <br>
+    {{ script_foot | raw }}
+</div>
