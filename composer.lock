@@ -400,6 +400,46 @@
             "time": "2020-12-15T16:57:00+00:00"
         },
         {
+            "name": "prismjs/prism",
+            "version": "v1.23.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PrismJS/prism.git",
+                "reference": "88a17b4ff586c8bbd0faf1b1524cee9e039fa580"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PrismJS/prism/zipball/88a17b4ff586c8bbd0faf1b1524cee9e039fa580",
+                "reference": "88a17b4ff586c8bbd0faf1b1524cee9e039fa580",
+                "shasum": ""
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "prism.js"
+                    ],
+                    "styles": [
+                        "themes/prism.css"
+                    ],
+                    "files": [
+                        "themes/*",
+                        "components/*"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Lightweight, robust, elegant syntax highlighting. A spin-off project from Dabblet.",
+            "support": {
+                "issues": "https://github.com/PrismJS/prism/issues",
+                "source": "https://github.com/PrismJS/prism/tree/v1.23.0"
+            },
+            "time": "2020-12-31T18:46:45+00:00"
+        },
+        {
             "name": "symfony/polyfill-ctype",
             "version": "v1.22.1",
             "source": {
@@ -941,7 +981,11 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "phpmv/ubiquity": 20,
+        "phpmv/ubiquity-debug": 20,
+        "phpmv/ubiquity-annotations": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

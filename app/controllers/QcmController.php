@@ -1,45 +1,76 @@
 <?php
+
 namespace controllers;
-use controllers\crud\datas\QcmControllerDatas;
-use Ubiquity\controllers\crud\CRUDDatas;
-use controllers\crud\viewers\QcmControllerViewer;
-use Ubiquity\controllers\crud\viewers\ModelViewer;
-use controllers\crud\events\QcmControllerEvents;
-use Ubiquity\controllers\crud\CRUDEvents;
-use controllers\crud\files\QcmControllerFiles;
-use Ubiquity\controllers\crud\CRUDFiles;
 
- /**
-  * CRUD Controller QcmController
- * @route("/Qcms","inherited"=>true,"automated"=>true)
-  */
-class QcmController extends \Ubiquity\controllers\crud\CRUDController{
+use Ubiquity\orm\DAO;
+use Ubiquity\utils\http\URequest;
+use models\Qcm;
+use models\Question;
+use services\UIService;
 
-	public function __construct(){
-		parent::__construct();
-		\Ubiquity\orm\DAO::start();
-		$this->model="models\\Qcm";
-	}
+/**
+ * Controller QcmController
+ *
+ *
+ * @property \Ajax\php\ubiquity\JsUtils $jquery
 
-	public function _getBaseRoute() {
-		return '/Qcms';
+**/
+  
+ 
+class QcmController extends ControllerBase {
+	private $uiService;
+	
+	
+	public function initialize() {
+		parent::initialize ();
+		$this->uiService = new UIService ( $this->jquery );
 	}
 	
-	protected function getAdminData(): CRUDDatas{
-		return new QcmControllerDatas($this);
+	public function index() {	    
+	    $frm = $this->uiService->qcmListeProf ();
+	    $this->jquery->getOnClick('._delete', 'QcmController/suppQcm','#main-container',['attr'=>'data-ajax']);
+	    $this->jquery->getOnClick('._edit', 'QcmController/afficherQCM','#main-container',['attr'=>'data-ajax']);
+	    $this->jquery->renderView ( "QcmController/index.html" );
 	}
-
-	protected function getModelViewer(): ModelViewer{
-		return new QcmControllerViewer($this);
+			
+	public function submit() {
+	    $qcm = new Qcm();
+	    URequest::setValuesToObject ( $qcm );
+	    $qcm->setStatus(isset($_POST['status']));
+	    $qcm->setCdate(date('Y-m-d G:i:s'));
+	    DAO::insert ( $qcm );
+	    $this->afficherQCM($qcm->getId());
 	}
-
-	protected function getEvents(): CRUDEvents{
-		return new QcmControllerEvents($this);
+	
+	public function ajout(){
+	    $frm = $this->uiService->qcmForm ();
+        $frm->fieldAsSubmit ( 'submit', 'blue', 'QcmController/submit', '#response', [
+				'ajax' => [ 
+						'hasLoader' => 'internal'
+				]
+		] ); 
+        $this->jquery->renderView ( "QcmController/ajout.html" );
 	}
-
-	protected function getFiles(): CRUDFiles{
-		return new QcmControllerFiles();
+	
+	public function afficherQCM($id){    
+	    $frm = $this->uiService->qcmAjoutQuestionForm ($id);
+	    $frm2 = $this->uiService->qcmChoixQuestions();
+	    $this->jquery->doJQuery('#form','html',"");
+	    $this->jquery->getOnClick('._display', 'QcmController/addQuestToQcm', '#affich container', ['attr'=>'data-ajax']);
+	    $this->jquery->renderView("QcmController/qcm.html");
 	}
-
-
+	    
+	public function addQuestToQcm($id, $qcm){
+	    
+	    DAO::update($qcm);
+	}
+	public function suppQcm($id){
+	    DAO::delete(Qcm::class, $id);
+	    $this->index();
+	}	    
+		
 }
+
+
+
+

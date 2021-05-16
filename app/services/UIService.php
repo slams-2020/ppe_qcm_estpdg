@@ -5,6 +5,7 @@ namespace services;
 use Ajax\semantic\html\base\constants\Color;
 use Ajax\php\ubiquity\JsUtils;
 use Ajax\semantic\html\elements\HtmlSegment;
+use Ajax\semantic\widgets\dataform\DataForm;
 use Ajax\service\JArray;
 use Ubiquity\orm\DAO;
 use models\Qcm;
@@ -42,8 +43,7 @@ class UIService
             'Statut du QCM',
             'Liste des Questions du QCM'
         ]);
-        
-        //fieldAsDataList ( 'questions', JArray::modelArray ( $questions, 'getId', 'getCaption' ) );
+
         return $table;
     }
     
@@ -54,7 +54,8 @@ class UIService
             ->dataTable("tableQuestions", Question::class, $questions);
         $table->setFields([
             'caption',
-            'points'
+            'points',
+            'buttons'
         ]);
         $table->setCaptions([
                 "Intitulé de la Question",
@@ -62,8 +63,11 @@ class UIService
             ]
         );
         $table->setIdentifierFunction('getId');
-        $table->addDisplayButton(false);
         $table->addEditButton(false);
+        $table->fieldAsButton('buttons','green enabled',['jsCallback'=>function($xx){
+            $xx->addIcon("plus");
+            $xx->setEnabled();
+        }]);
         return $table;
     }
     
@@ -120,7 +124,7 @@ class UIService
         return $frm;
     }
     
-    public function questionForm()
+    public function questionForm():DataForm
     {
         $q = new Question ();
         $frm = $this->jquery->semantic()->dataForm('form', $q);
@@ -128,18 +132,24 @@ class UIService
             'caption',
             'typeq',
             'points',
-            'frm'
+            'frm',
+            'addReponse',
+            'submit'
         ]);
         $frm->setCaptions([
             'Intitulé de la question',
             'Type de question',
-            'Points de la question'
+            'Points de la question',
+            '',
+            'Ajouter une question',
+            'Valider'
         ]);
         $frm->fieldAsInput('caption', [
             'rules' => [
                 'empty'
             ]
         ]);
+
         $frm->setValueFunction('frm', function () {
             return new HtmlSegment('response');
         });

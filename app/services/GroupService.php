@@ -54,25 +54,30 @@ class GroupService {
         $table->addEditButton(false);
         return  $table;
     }
-    public function UserListe($users) {
-        $table = $this->jquery->semantic ()->dataTable( "tableU", User::class,$users );
-        $table->setFields(['lastname','firstname']);
+
+    public function UserListe($users,$uses,$idGroup) {
+        $table = $this->jquery->semantic ()->dataTable( "table" . $uses, User::class, $users );
+        $table->setFields(['lastname','firstname','bt'.$uses]);
         $table->setCaptions( [
             "Nom",
             "Prenom"
         ] );
         $table->setIdentifierFunction('getId');
-        return  $table;
-    }
-    public function UserListeInGroup() {
-        $users = DAO::getAll ( User::class );
-        $table = $this->jquery->semantic ()->dataTable( "tableUIG", User::class,$users );
-        $table->setFields(['lastname','firstname']);
-        $table->setCaptions( [
-            "Nom",
-            "Prenom"
-        ] );
-        $table->setIdentifierFunction('getId');
+        $table->setEdition(true);
+        $table->setEmptyMessage("Aucun Utilisateurs");
+        if ($uses=="notIn") {
+            $table->fieldAsButton('bt'.$uses,
+                "blue _add",['jsCallback' => function($bt,$instance) use($idGroup){
+                $bt->asIcon('plus');
+                $bt->setProperty('data-ajax',$instance->getID().'::'.$idGroup);
+            }]);
+        } else {
+            $table->fieldAsButton('bt'.$uses,
+                "red _remove",['jsCallback' => function($bt,$instance) use($idGroup){
+                $bt->asIcon('x');
+                $bt->setProperty('data-ajax',$instance->getID().'::'.$idGroup);
+            }]);
+        }
         return  $table;
     }
 }
