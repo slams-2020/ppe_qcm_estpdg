@@ -1,5 +1,4 @@
 #.gitignore file
-vendor/
 app/cache/
 app/logs/
 
