@@ -51,12 +51,12 @@ class ComposerStaticInitb09354cc79d5463ca6ba48988423cd6e
         ),
         'Ubiquity\\' => 
         array (
-            0 => __DIR__ . '/..' . '/phpmv/ubiquity/src/Ubiquity',
-            1 => __DIR__ . '/..' . '/phpmv/ubiquity-annotations/src/Ubiquity',
-            2 => __DIR__ . '/..' . '/phpmv/ubiquity-debug/src/Ubiquity',
-            3 => __DIR__ . '/..' . '/phpmv/ubiquity-dev/src/Ubiquity',
-            4 => __DIR__ . '/..' . '/phpmv/ubiquity-mailer/src/Ubiquity',
-            5 => __DIR__ . '/..' . '/phpmv/ubiquity-webtools/src/Ubiquity',
+            0 => __DIR__ . '/..' . '/phpmv/ubiquity-annotations/src/Ubiquity',
+            1 => __DIR__ . '/..' . '/phpmv/ubiquity-debug/src/Ubiquity',
+            2 => __DIR__ . '/..' . '/phpmv/ubiquity-dev/src/Ubiquity',
+            3 => __DIR__ . '/..' . '/phpmv/ubiquity-mailer/src/Ubiquity',
+            4 => __DIR__ . '/..' . '/phpmv/ubiquity-webtools/src/Ubiquity',
+            5 => __DIR__ . '/..' . '/phpmv/ubiquity/src/Ubiquity',
         ),
         'Twig\\' => 
         array (

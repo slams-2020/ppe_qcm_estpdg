@@ -1,18 +1,18 @@
 <?php
 return array (
-		"siteUrl" => "http://127.0.0.1:8090/",
+		"siteUrl" => "http://pdg-est-2.sts-sio-caen.info",
 		"database" => array (
 				"type" => "mysql",
 				"dbName" => "qcm",
 				"serverName" => "127.0.0.1",
 				"port" => 3306,
-				"user" => "root",
-				"password" => "",
+				"user" => "sio2a",
+				"password" => "sio2a",
 				"options" => array (),
 				"cache" => false,
 				"wrapper" => "Ubiquity\\db\\providers\\pdo\\PDOWrapper"
 		),
-		"sessionName" => "s5fc4a2ec7c61e",
+		"sessionName" => null,
 		"namespaces" => array (),
 		"templateEngine" => "Ubiquity\\views\\engine\\Twig",
 		"templateEngineOptions" => array (
@@ -30,7 +30,7 @@ return array (
 		"di" => array (
 				"@exec" => array (
 						"jquery" => function ($controller) {
-							return \Ubiquity\core\Framework::diSemantic ( $controller );
+							return \Ubiquity\core\Framework::diSemantic ( $controller ) ;
 						}
 				)
 		),

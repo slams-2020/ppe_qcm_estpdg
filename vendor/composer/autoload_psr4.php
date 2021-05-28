@@ -7,7 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'mindplay\\annotations\\' => array($vendorDir . '/mindplay/annotations/src/annotations'),
-    'Ubiquity\\' => array($vendorDir . '/phpmv/ubiquity/src/Ubiquity', $vendorDir . '/phpmv/ubiquity-annotations/src/Ubiquity', $vendorDir . '/phpmv/ubiquity-debug/src/Ubiquity', $vendorDir . '/phpmv/ubiquity-dev/src/Ubiquity', $vendorDir . '/phpmv/ubiquity-mailer/src/Ubiquity', $vendorDir . '/phpmv/ubiquity-webtools/src/Ubiquity'),
+    'Ubiquity\\' => array($vendorDir . '/phpmv/ubiquity-annotations/src/Ubiquity', $vendorDir . '/phpmv/ubiquity-debug/src/Ubiquity', $vendorDir . '/phpmv/ubiquity-dev/src/Ubiquity', $vendorDir . '/phpmv/ubiquity-mailer/src/Ubiquity', $vendorDir . '/phpmv/ubiquity-webtools/src/Ubiquity', $vendorDir . '/phpmv/ubiquity/src/Ubiquity'),
     'Twig\\' => array($vendorDir . '/twig/twig/src'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),

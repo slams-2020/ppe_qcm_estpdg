@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '0b90814f6c15ee196c0569e82691c683ec045917',
+    'reference' => '2a7aa6a1bca4a6c7128c4bd90a3bbe013e29e111',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '0b90814f6c15ee196c0569e82691c683ec045917',
+      'reference' => '2a7aa6a1bca4a6c7128c4bd90a3bbe013e29e111',
     ),
     'czproject/git-php' => 
     array (
@@ -76,12 +76,13 @@
     ),
     'phpmv/ubiquity' => 
     array (
-      'pretty_version' => '2.4.4',
-      'version' => '2.4.4.0',
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
       'aliases' => 
       array (
+        0 => '2.4.x-dev',
       ),
-      'reference' => 'e3508c8c3948a3b3ca36ba7e064140bf29e1325b',
+      'reference' => '8516fd5f802f7ffc4bd03b237e560bd1e3aaeeb4',
     ),
     'phpmv/ubiquity-annotations' => 
     array (

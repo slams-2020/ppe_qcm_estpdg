@@ -128,6 +128,53 @@ class UArrayModels {
 		}
 		return $objects;
 	}
+
+	/**
+	 * Remove an object from an array of objects using one of its properties.
+	 * @param array $objects
+	 * @param object $object
+	 * @param string $property default the id property
+	 * @return array
+	 */
+	public static function removeBy(?array $objects,object $object,string $property='id'):array{
+		if(!is_array($objects) || $object==null){
+			return;
+		}
+		$get='get'.\ucfirst($property);
+		$objectValue=$object->$get();
+		foreach ($objects as $index=>$o) {
+			if($objectValue===$o->$get()){
+				unset($objects[$index]);
+				return $objects;
+			}
+		}
+		return $objects;
+	}
+	
+	/**
+	 * Remove objects from an array of objects using one of their properties.
+	 * @param array $objects
+	 * @param object $object
+	 * @param string $property default the id property
+	 * @return array
+	 */
+	public static function removeAllBy(?array $objects,object $object,string $property='id'):array{
+		if(!is_array($objects) || $object==null){
+			return;
+		}
+		$get='get'.\ucfirst($property);
+		$objectValue=$object->$get();
+		$toRemove=[];
+		foreach ($objects as $index=>$o) {
+			if($objectValue===$o->$get()){
+				$toRemove[]=$i;
+			}
+		}
+		foreach ($toRemove as $index){
+			unset($objects[$index]);
+		}
+		return $objects;
+	}
 	
 	public static function compute(?array $objects,callable $callable,callable $computeCall){
 		$res=null;
@@ -165,6 +212,68 @@ class UArrayModels {
 			unset($objects[$index]);
 		}
 		return $objects;
+	}
+	
+	/**
+	 * @param array $objects
+	 * @return array
+	 */
+	public static function asArray(array $objects):array{
+		$result=[];
+		foreach ($objects as $index=>$o) {
+			$result[$index]=$object->_rest??[];
+		}
+		return $result;
+	}
+	
+	/**
+	 * @param array $objects
+	 * @param int options
+	 * @return string
+	 */
+	public static function asJson(array $objects,int $options=null):string{
+		$result=[];
+		foreach ($objects as $index=>$o) {
+			$result[$index]=$object->_rest??[];
+		}
+		return \json_encode($result,$options);
+	}
+	
+	/**
+	 * @param array $objects
+	 * @param array $properties
+	 * @return array
+	 */
+	public static function asArrayProperties(array $objects,array $properties):array{
+		$res=[];
+		$accessors=self::getAccessors($properties);
+		foreach ($objects as $object){
+			$or=[];
+			foreach ($accessors as $prop=>$get){
+				$or[$prop]=$object->$get();
+			}
+			$res[]=$or;
+		}
+		return $res;
+	}
+	
+	/**
+	 * @param array $objects
+	 * @param array $properties
+	 * @param int $options
+	 * @return string
+	 */
+	public static function asJsonProperties(array $objects,array $properties,int $options=null):string{
+		return \json_encode(self::asArrayProperties($objects, $properties),$options);
+	}
+	
+	private static function getAccessors($properties,$prefix='get'){
+		$res=[];
+		foreach ($properties as $property){
+			$res[$property]=$prefix.\ucfirst($property);
+			
+		}
+		return $res;
 	}
 	
 	/**

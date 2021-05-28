@@ -66,7 +66,6 @@ class UIService
         $table->addEditButton(false);
         $table->fieldAsButton('buttons','green enabled',['jsCallback'=>function($xx){
             $xx->addIcon("plus");
-            $xx->setEnabled();
         }]);
         return $table;
     }
