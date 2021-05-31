@@ -59,14 +59,16 @@ class UIService
         ]);
         $table->setCaptions([
                 "Intitulé de la Question",
-                "Points de la question"
+                "Points de la question",
+                "Actions"
             ]
         );
+        $table->setEdition(true);
         $table->setIdentifierFunction('getId');
         $table->addEditButton(false);
-        $table->fieldAsButton('buttons','green enabled',['jsCallback'=>function($xx){
+        $table->fieldAsButton('buttons','circular green ',['jsCallback'=>function($xx){
             $xx->addIcon("plus");
-            $xx->setEnabled();
+
         }]);
         return $table;
     }

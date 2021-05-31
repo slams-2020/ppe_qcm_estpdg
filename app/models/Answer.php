@@ -23,6 +23,17 @@ class Answer{
 	private $score;
 
 	/**
+	 * @oneToMany("mappedBy"=>"answer","className"=>"models\\Answer")
+	 */
+	private $answers;
+
+	/**
+	 * @manyToOne()
+	 * @joinColumn("className"=>"models\\Answer","name"=>"idAnswer2","nullable"=>true)
+	 */
+	private $answer;
+
+	/**
 	 * @oneToMany("mappedBy"=>"answer","className"=>"models\\Useranswer")
 	 */
 	private $useranswers;
@@ -55,6 +66,26 @@ class Answer{
 
 	public function setScore($score){
 		$this->score=$score;
+	}
+
+	public function getAnswers(){
+		return $this->answers;
+	}
+
+	public function setAnswers($answers){
+		$this->answers=$answers;
+	}
+
+	 public function addAnswer($answer){
+		$this->answers[]=$answer;
+	}
+
+	public function getAnswer(){
+		return $this->answer;
+	}
+
+	public function setAnswer($answer){
+		$this->answer=$answer;
 	}
 
 	public function getUseranswers(){

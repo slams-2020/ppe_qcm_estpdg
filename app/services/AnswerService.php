@@ -74,6 +74,57 @@ class AnswerService
         ]);
         return $frm;
     }
+
+    public function reponseRapprochementForm()
+    {
+        $r = new Answer ();
+        $frm = $this->jquery->semantic()->dataForm('answerRapprochementForm', $r);
+        $frm->getHtmlComponent()->setTagName('div');
+        $frm->setFields([
+            'title',
+            'caption',
+            'caption2',
+        ]);
+        $frm->setCaptions([
+            '',
+            'Intitulé de la 1ière réponse',
+            'Intitulé de la 2nd réponse'
+        ]);
+        $frm->fieldAsInput('caption', [
+            'rules' => [
+                'empty'
+            ]
+        ]);
+        $frm->setValueFunction('title',function(){
+            $lbl=new HtmlLabel('','Couple de réponse :');
+            return $lbl;
+        });
+        $frm->addSeparatorAfter(0);
+        $frm->addSeparatorAfter(3);
+        $frm->addDividerBefore(4,'');
+        $frm->setPropertyValues('name', [
+            'caption' => 'answerCaption[]','score' => 'score[]'
+        ]);
+
+        $questions = DAO::getAll(Question::class);
+        $r->setQuestion((\current($questions))->getId());
+        $frm->fieldAsDropDown('question',
+            JArray::modelArray($questions, 'getId', 'getCaption'), false, [
+                'rules' => [
+                    'empty'
+                ]
+            ]);
+        $frm->fieldAsInput('caption2', [
+            'rules' => [
+                'empty'
+            ]
+        ]);
+        $frm->setValidationParams([
+            "on"     => "blur",
+            "inline" => true
+        ]);
+        return $frm;
+    }
 }
 
 

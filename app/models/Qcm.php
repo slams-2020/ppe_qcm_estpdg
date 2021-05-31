@@ -24,9 +24,7 @@ class Qcm{
 	private $description;
 
 	/**
-	 * @column("name"=>"cdate","nullable"=>true,"dbType"=>"datetime")
-	 * @validator("type"=>"type","constraints"=>["ref"=>"dateTime"])
-	 * @transformer("name"=>"datetime")
+	 * @column("name"=>"cdate","nullable"=>true,"dbType"=>"timestamp")
 	 */
 	private $cdate;
 

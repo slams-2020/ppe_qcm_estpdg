@@ -32,7 +32,7 @@ class QcmController extends ControllerBase {
 	    $this->jquery->getOnClick('._edit', 'QcmController/afficherQCM','#main-container',['attr'=>'data-ajax']);
 	    $this->jquery->renderView ( "QcmController/index.html" );
 	}
-			
+
 	public function submit() {
 	    $qcm = new Qcm();
 	    URequest::setValuesToObject ( $qcm );
@@ -56,12 +56,12 @@ class QcmController extends ControllerBase {
 	    $frm = $this->uiService->qcmAjoutQuestionForm ($id);
 	    $frm2 = $this->uiService->qcmChoixQuestions();
 	    $this->jquery->doJQuery('#form','html',"");
-	    $this->jquery->getOnClick('._display', 'QcmController/addQuestToQcm', '#affich container', ['attr'=>'data-ajax']);
+	    $this->jquery->getOnClick('.tableQuestions-button-1', 'QcmController/addQuestToQcm', '#affich container', ['attr'=>'data-ajax']);
 	    $this->jquery->renderView("QcmController/qcm.html");
 	}
 	    
 	public function addQuestToQcm($id, $qcm){
-	    
+
 	    DAO::update($qcm);
 	}
 	public function suppQcm($id){

@@ -62,6 +62,7 @@ class QuestionController extends ControllerBase
         $this->loadView('QuestionController/index.html');
 }
 
+
     public function question()
     {
         $frm = $this->UIService->questionForm();
@@ -70,7 +71,7 @@ class QuestionController extends ControllerBase
                 'hasLoader' => 'internal'
             ]
         ]);
-        $frm->fieldAsButton('addReponse','green',['value'=>'Ajouter une réponse','tagName'=>'div']);
+        $frm->fieldAsButton('addReponse','blue',['value'=>'Ajouter une réponse','tagName'=>'div']);
         $this->jquery->getOnClick('#dropdown-form-typeq-0 .item', 'QuestionController/detailsQ', '#response', [
             'attr' => 'data-value',
             'hasLoader' => false,
@@ -88,6 +89,9 @@ class QuestionController extends ControllerBase
             $frm = $this->AnswerService->reponseForm();
             $this->jquery->renderView("AnswerController/index.html");
         }
-
+        elseif ($type->getId() == 3) {
+            $frm = $this->AnswerService->reponseRapprochementForm();
+            $this->jquery->renderView("AnswerController/answerRapprochement.html");
+        }
     }
 }
